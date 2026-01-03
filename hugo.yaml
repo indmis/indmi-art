@@ -1,4 +1,4 @@
-baseURL: "indmis.github.io" # Обязательно со слэшем в конце!
+baseURL: "https://github.com/indmis/indmi-art" # Обязательно со слэшем в конце!
 languageCode: ru-ru
 title: "Indmi Art"
 theme: "PaperMod"
