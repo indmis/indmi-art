@@ -12,4 +12,4 @@ params:
     subtitle: "Междисциплинарный художник"
     buttons:
       - name: Проекты
-        url: "/posts"
+        url: "posts/"
