@@ -1,0 +1,15 @@
+baseURL: "indmis.github.io" # Обязательно со слэшем в конце!
+languageCode: ru-ru
+title: "Indmi Art"
+theme: "PaperMod"
+
+params:
+  defaultTheme: auto
+  showCodeCopyButtons: true
+  profileMode:
+    enabled: true
+    title: "Indmi Art"
+    subtitle: "Междисциплинарный художник"
+    buttons:
+      - name: Проекты
+        url: "/posts"
