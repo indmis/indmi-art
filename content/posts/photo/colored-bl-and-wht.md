@@ -12,9 +12,9 @@ cover:
 
 Здесь начинается описание вашего проекта.
 
-![Солнечный кот](/images/china1.webp)
-![Красное острое](/images/china2.webp)
-![Уборочная техника](/images/china3.webp)
-![Храм](/images/china4.webp)
-![Перекресток](/images/china5.webp)
-![Увядающее](/images/china6.webp)
+![Солнечный кот](/indmi-art/images/china1.webp)
+![Красное острое](/indmi-art/images/china2.webp)
+![Уборочная техника](/indmi-art/images/china3.webp)
+![Храм](/indmi-art/images/china4.webp)
+![Перекресток](/indmi-art/images/china5.webp)
+![Увядающее](/indmi-art/images/china6.webp)
