@@ -2,24 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/posts/installation/</loc>
+    <loc>https://github.com/indmis/indmi-art/posts/installation/</loc>
   </url><url>
-    <loc>//localhost:1313/posts/sound/</loc>
+    <loc>https://github.com/indmis/indmi-art/posts/sound/</loc>
   </url><url>
-    <loc>//localhost:1313/posts/photo/</loc>
+    <loc>https://github.com/indmis/indmi-art/posts/photo/</loc>
     <lastmod>2025-01-13T12:00:00+03:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/</loc>
+    <loc>https://github.com/indmis/indmi-art/</loc>
     <lastmod>2025-01-13T12:00:00+03:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/</loc>
+    <loc>https://github.com/indmis/indmi-art/posts/</loc>
     <lastmod>2025-01-13T12:00:00+03:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/photo/colored-bl-and-wht/</loc>
+    <loc>https://github.com/indmis/indmi-art/posts/photo/colored-bl-and-wht/</loc>
     <lastmod>2025-01-13T12:00:00+03:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/</loc>
+    <loc>https://github.com/indmis/indmi-art/categories/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/</loc>
+    <loc>https://github.com/indmis/indmi-art/tags/</loc>
   </url>
 </urlset>

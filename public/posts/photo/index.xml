@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Фотография on Indmi Art</title>
-    <link>//localhost:1313/posts/photo/</link>
+    <link>https://github.com/indmis/indmi-art/posts/photo/</link>
     <description>Recent content in Фотография on Indmi Art</description>
     <generator>Hugo -- 0.154.1</generator>
     <language>ru-ru</language>
     <lastBuildDate>Mon, 13 Jan 2025 12:00:00 +0300</lastBuildDate>
-    <atom:link href="//localhost:1313/posts/photo/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://github.com/indmis/indmi-art/posts/photo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Цветное по памяти</title>
-      <link>//localhost:1313/posts/photo/colored-bl-and-wht/</link>
+      <link>https://github.com/indmis/indmi-art/posts/photo/colored-bl-and-wht/</link>
       <pubDate>Mon, 13 Jan 2025 12:00:00 +0300</pubDate>
-      <guid>//localhost:1313/posts/photo/colored-bl-and-wht/</guid>
+      <guid>https://github.com/indmis/indmi-art/posts/photo/colored-bl-and-wht/</guid>
       <description>Эти снимки были отсняты на чёрно-белую плёнку, а затем вручную раскрашены по воспоминаниям о цвете</description>
     </item>
   </channel>
