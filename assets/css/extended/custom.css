@@ -17,7 +17,32 @@ body {
     background: rgba(30, 30, 30, 0.8); /* Темная тема */
 }
 
-.profile_inner, .post-entry, .header, .footer, h1, h2, p {
+/* Применяем магию ко всем текстовым элементам */
+.profile_inner, 
+.post-entry, 
+.header, 
+.footer, 
+h1, h2, h3, p, span, a {
     mix-blend-mode: difference !important;
-    color: #fff !important; /* На светлом фоне станет черным, на темном — белым */
+    /* Цвет ОБЯЗАТЕЛЬНО должен быть белым, чтобы инверсия работала корректно */
+    color: #ffffff !important; 
+    transition: all 0.3s ease;
+}
+
+/* Убираем фоновые плашки у карточек, чтобы они не мешали магии */
+.post-entry, .profile_inner {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Фикс для навигации: ссылки в меню тоже должны инвертироваться */
+#menu a {
+    color: #ffffff !important;
+}
+
+/* Чтобы кнопки и иконки не исчезали */
+.social-icons a, .buttons a {
+    mix-blend-mode: difference !important;
+    color: #ffffff !important;
 }
