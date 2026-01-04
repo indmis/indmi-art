@@ -1,61 +1,42 @@
-body {
+/* 1. ФОН САЙТА */
+html, body {
     background-image: url("/indmi-art/images/bg.gif") !important;
     background-size: cover !important;
     background-attachment: fixed !important;
     background-position: center !important;
+    background-color: #000 !important; /* База, чтобы не моргало белым */
 }
 
-/* Чтобы контент был читаемым на фоне гифки, 
-добавим немного прозрачности карточкам */
-.profile_inner, .post-entry {
-    background: rgba(255, 255, 255, 0.8); /* Светлая тема */
-    padding: 20px;
-    border-radius: 12px;
-}
-
-.dark .profile_inner, .dark .post-entry {
-    background: rgba(30, 30, 30, 0.8); /* Темная тема */
-}
-
-/* Применяем магию ко всем текстовым элементам */
-.profile_inner, 
-.post-entry, 
-.header, 
-.footer, 
-h1, h2, h3, p, span, a {
-    mix-blend-mode: difference !important;
-    /* Цвет ОБЯЗАТЕЛЬНО должен быть белым, чтобы инверсия работала корректно */
-    color: #ffffff !important; 
-    transition: all 0.3s ease;
-}
-
-/* Убираем фоновые плашки у карточек, чтобы они не мешали магии */
-.post-entry, .profile_inner {
+/* 2. УДАЛЯЕМ ПЛАШКИ (чтобы видеть гифку сквозь контент) */
+.main, .post-entry, .profile_inner, .header, .footer, .list, .page {
     background: transparent !important;
+    background-color: transparent !important;
     box-shadow: none !important;
     border: none !important;
 }
 
-/* Фикс для навигации: ссылки в меню тоже должны инвертироваться */
-#menu a {
-    color: #ffffff !important;
-}
-
-/* Чтобы кнопки и иконки не исчезали */
-.social-icons a, .buttons a {
+/* 3. МАГИЯ ТОЛЬКО ДЛЯ ТЕКСТА (Инверсия) */
+/* Мы перечисляем только текстовые теги, не трогая контейнеры с фото */
+h1, h2, h3, h4, h5, h6, 
+p, span, li, a, time, 
+.post-description, .post-meta, .entry-header h2,
+.logo a, #menu a, .social-icons a {
     mix-blend-mode: difference !important;
-    color: #ffffff !important;
+    color: #ffffff !important; /* Белый обязателен для корректной инверсии */
 }
 
-/* Возвращаем нормальные цвета изображениям и видео */
-img, video, iframe, .post-content img, .entry-content img {
+/* 4. ЗАЩИТА ИЗОБРАЖЕНИЙ И ВИДЕО */
+/* Принудительно выводим медиа в нормальный режим */
+img, video, iframe, .post-cover img, .entry-content img, .post-content img {
     mix-blend-mode: normal !important;
-    isolation: isolate; /* Создает отдельный слой отрисовки */
-    position: relative; /* Помогает слоям правильно распределиться */
-    z-index: 10;
+    isolation: isolate !important; /* Создает независимый слой для рендеринга */
+    position: relative;
+    z-index: 1;
 }
 
-/* Если у вас есть обложки (Cover images) в PaperMod */
-.post-cover img {
-    mix-blend-mode: normal !important;
+/* 5. КНОПКИ (чтобы были видны) */
+.buttons a {
+    border: 1px solid #ffffff !important;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
