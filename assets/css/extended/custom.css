@@ -1,77 +1,56 @@
-/* 1. ГИФКА ТОЛЬКО НА ГЛАВНОЙ */
-/* Добавляем .main, так как на мобильных тема часто вешает фон на него */
-.home, .home body, .home .main {
+/* 1. ГЛОБАЛЬНЫЙ ФОН (Применяем к html, чтобы был под всем сайтом) */
+html.home, 
+html.home body {
     background-image: url("/indmi-art/images/bg.gif") !important;
     background-size: cover !important;
     background-position: center !important;
-    background-color: #000 !important;
     background-repeat: no-repeat !important;
+    background-color: #000 !important;
 }
 
-/* На мобильных fixed-фон часто не отображается, меняем на scroll */
+/* Фикс для мобильных: отключаем 'fixed', так как он ломает отображение на iOS/Android */
 @media (max-width: 768px) {
-    .home, .home body, .home .main {
+    html.home, html.home body {
         background-attachment: scroll !important;
     }
 }
-
-/* На десктопах оставляем эффект фиксации */
 @media (min-width: 769px) {
-    .home, .home body, .home .main {
+    html.home, html.home body {
         background-attachment: fixed !important;
     }
 }
 
-/* 2. МАГИЯ ТОЛЬКО НА ГЛАВНОЙ */
-/* Принудительно убираем любые фоны у контейнеров на главной */
-.home .main, .home .profile_inner, .home .header, .home .footer {
+/* 2. ПРОЗРАЧНОСТЬ (Убираем всё, что может закрыть фон) */
+.home .main, 
+.home .profile_inner, 
+.home .header, 
+.home .footer,
+.home .list,
+.home .page {
     background: transparent !important;
     background-color: transparent !important;
     box-shadow: none !important;
     border: none !important;
 }
 
-/* Сама инверсия текста */
-.home .profile_inner h1, 
-.home .profile_inner .profile_description,
-.home .header a,
-.home #menu a,
-.home .social-icons a,
-.home .buttons a {
+/* 3. МАГИЯ ТЕКСТА (Инверсия) */
+/* Ограничиваем только текстовыми элементами, чтобы не задеть фото */
+.home h1, .home h2, .home h3, .home p, .home span, 
+.home a, .home li, .home time, .home .profile_description {
     mix-blend-mode: difference !important;
     color: #ffffff !important;
-    background: transparent !important;
 }
 
-/* 3. ОЧИСТКА ВНУТРЕННИХ СТРАНИЦ */
-/* На страницах проектов всё стандартно и чисто */
+/* 4. ОЧИСТКА ВНУТРЕННИХ СТРАНИЦ (Галерейный режим) */
 body:not(.home) {
     background-image: none !important;
-    background-color: var(--theme) !important; 
+    background-color: var(--theme) !important;
 }
 
-/* Защита изображений внутри проектов (чтобы не было негатива) */
+/* Защита фото внутри проектов */
 body:not(.home) img, 
 body:not(.home) video, 
 body:not(.home) iframe {
     mix-blend-mode: normal !important;
     isolation: isolate !important;
-}
-
-/* Возвращаем стандартный вид тексту вне главной */
-body:not(.home) a, 
-body:not(.home) p, 
-body:not(.home) h1 {
-    mix-blend-mode: normal !important;
-}
-
-/* 4. ФИКС ДЛЯ 404 */
-.error404 {
-    background-image: url("/indmi-art/images/bg.gif") !important;
-    background-size: cover !important;
-    background-position: center !important;
-}
-.error404 h1, .error404 p, .error404 a {
-    mix-blend-mode: difference !important;
-    color: #fff !important;
 }
