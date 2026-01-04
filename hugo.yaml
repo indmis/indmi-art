@@ -6,6 +6,9 @@ theme: "PaperMod"
 params:
   defaultTheme: auto
   showCodeCopyButtons: true
+  params:
+  showFullTextContent: false # Чтобы на главной не вываливался весь текст проектов
+  displayFullPostContent: false
   profileMode:
     enabled: true
     title: "Indmi Art"
@@ -13,3 +16,25 @@ params:
     buttons:
       - name: Проекты
         url: "posts/"
+
+languages:
+  ru:
+    languageName: "Russian"
+    menu:
+      main:
+        - identifier: installations
+          name: "Инсталляции"
+          url: /posts/installations/
+          weight: 10
+        - identifier: photography
+          name: "Фотография"
+          url: /posts/photo/
+          weight: 20
+        - identifier: sound
+          name: "Звук"
+          url: /posts/sound/
+          weight: 30
+        - identifier: about
+          name: "Обо мне"
+          url: /about/ # Эту страницу можно создать позже
+          weight: 40
