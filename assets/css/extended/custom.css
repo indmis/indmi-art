@@ -1,41 +1,47 @@
-/* 1. ФОН */
-html, body {
-    background-image: url("/indmi-art/images/bg.gif") !important;
-    background-size: cover !important;
-    background-attachment: fixed !important;
-    background-position: center !important;
-    background-color: #000 !important;
+/* 1. ФОН (создаем его как отдельный слой ПОД всем сайтом) */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/indmi-art/images/bg.gif");
+    background-size: cover;
+    background-position: center;
+    z-index: -1; /* Уходим в самый низ */
 }
 
-/* 2. ПРОЗРАЧНОСТЬ КОНТЕЙНЕРОВ (Магии здесь быть НЕ должно) */
-.main, .post-entry, .profile_inner, .header, .footer, .post-content, .entry-content, .post-single {
+/* Очищаем фон у всего остального */
+html, body, .main, .post-entry, .profile_inner, .header, .footer {
     background: transparent !important;
-    mix-blend-mode: normal !important; /* Убеждаемся, что контейнер не инвертирует детей */
+    background-color: transparent !important;
 }
 
-/* 3. МАГИЯ ТОЛЬКО ДЛЯ ТЕКСТА */
-/* Применяем инверсию точечно к буквам */
-h1, h2, h3, h4, h5, h6, 
-p, span, li, a, time, 
-.post-description, .post-meta, .entry-header h2,
-.logo a, #menu a, .social-icons a, .buttons a {
+/* 2. ТЕКСТ: ИСПОЛЬЗУЕМ ДРУГОЙ ТИП СМЕШИВАНИЯ */
+/* Вместо размытия всего контейнера, используем background-clip или просто изоляцию текста */
+h1, h2, h3, h4, h5, h6, p, span, a, li, time, .logo a, #menu a {
+    color: #fff !important;
     mix-blend-mode: difference !important;
-    color: #ffffff !important;
     position: relative;
-    z-index: 2; /* Текст выше картинок */
+    /* Убираем любые фильтры, которые могли наследоваться */
+    isolation: auto !important; 
 }
 
-/* 4. ЖЕСТКАЯ ЗАЩИТА ИЗОБРАЖЕНИЙ */
-/* isolation: isolate заставляет браузер считать это фото отдельным миром */
-img, video, iframe, .post-cover, .entry-content img, .post-content img {
+/* 3. ФОТОГРАФИИ: ЖЕСТКИЙ ВЫВОД ИЗ СМЕШИВАНИЯ */
+/* Главный секрет: мы создаем для картинок свой собственный 'контекст наложения' */
+img, video, iframe, .post-cover img {
     mix-blend-mode: normal !important;
-    isolation: isolate !important;
+    /* isolation: isolate работает только если элемент не является частью другого эффекта */
+    display: block; 
     position: relative;
-    z-index: 1; /* Картинки под текстом */
-    filter: none !important; /* На всякий случай отключаем фильтры темы */
+    z-index: 100 !important; /* Поднимаем фото ВЫШЕ магии */
+    transform: translateZ(0); /* Магия 2026: заставляем браузер рендерить это через видеокарту отдельно */
 }
 
-/* 5. УБИРАЕМ ТЕМНЫЙ ФИЛЬТР С ОБЛОЖЕК (если есть) */
-.post-cover img {
-    opacity: 1 !important;
+/* 4. ЧТОБЫ ТЕКСТ НЕ ИНВЕРТИРОВАЛ КАРТИНКИ */
+/* Если текст наезжает на фото, он может его инвертировать. 
+   Если вам это не нужно, добавим фон самим картинкам */
+img {
+    background-color: #000; /* Создает барьер для магии */
 }
