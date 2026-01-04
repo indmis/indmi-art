@@ -1,47 +1,40 @@
-/* 1. ФОН (создаем его как отдельный слой ПОД всем сайтом) */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("/indmi-art/images/bg.gif");
-    background-size: cover;
-    background-position: center;
-    z-index: -1; /* Уходим в самый низ */
+/* 1. ГИФКА ТОЛЬКО НА ГЛАВНОЙ */
+.home {
+    background-image: url("/indmi-art/images/bg.gif") !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    background-position: center !important;
+    background-color: #000 !important;
 }
 
-/* Очищаем фон у всего остального */
-html, body, .main, .post-entry, .profile_inner, .header, .footer {
-    background: transparent !important;
-    background-color: transparent !important;
-}
-
-/* 2. ТЕКСТ: ИСПОЛЬЗУЕМ ДРУГОЙ ТИП СМЕШИВАНИЯ */
-/* Вместо размытия всего контейнера, используем background-clip или просто изоляцию текста */
-h1, h2, h3, h4, h5, h6, p, span, a, li, time, .logo a, #menu a {
-    color: #fff !important;
+/* 2. МАГИЯ ТОЛЬКО НА ГЛАВНОЙ */
+/* Используем класс .home перед всеми элементами */
+.home .profile_inner, 
+.home .profile_inner h1, 
+.home .profile_inner .profile_description,
+.home .header,
+.home .header a,
+.home #menu a,
+.home .social-icons a {
     mix-blend-mode: difference !important;
-    position: relative;
-    /* Убираем любые фильтры, которые могли наследоваться */
-    isolation: auto !important; 
+    color: #ffffff !important;
+    background: transparent !important;
 }
 
-/* 3. ФОТОГРАФИИ: ЖЕСТКИЙ ВЫВОД ИЗ СМЕШИВАНИЯ */
-/* Главный секрет: мы создаем для картинок свой собственный 'контекст наложения' */
-img, video, iframe, .post-cover img {
+/* 3. ОЧИСТКА ВНУТРЕННИХ СТРАНИЦ */
+/* Убеждаемся, что на страницах проектов всё стандартно */
+body:not(.home) {
+    background-image: none !important;
+    /* Здесь можно задать цвет фона для всех страниц кроме главной */
+    background-color: var(--theme) !important; 
+}
+
+/* Возвращаем стандартный вид тексту на внутренних страницах */
+body:not(.home) a, 
+body:not(.home) p, 
+body:not(.home) h1 {
     mix-blend-mode: normal !important;
-    /* isolation: isolate работает только если элемент не является частью другого эффекта */
-    display: block; 
-    position: relative;
-    z-index: 100 !important; /* Поднимаем фото ВЫШЕ магии */
-    transform: translateZ(0); /* Магия 2026: заставляем браузер рендерить это через видеокарту отдельно */
 }
 
-/* 4. ЧТОБЫ ТЕКСТ НЕ ИНВЕРТИРОВАЛ КАРТИНКИ */
-/* Если текст наезжает на фото, он может его инвертировать. 
-   Если вам это не нужно, добавим фон самим картинкам */
-img {
-    background-color: #000; /* Создает барьер для магии */
-}
+/* 4. ФИКС ДЛЯ 404 (по желанию) */
+/* Если хотите гифку и на 404, добавьте класс .error404 по аналогии с .home */
