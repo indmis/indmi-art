@@ -16,3 +16,19 @@ body {
 .dark .profile_inner, .dark .post-entry {
     background: rgba(30, 30, 30, 0.8); /* Темная тема */
 }
+
+/* Эффект матового стекла для карточек проектов и профиля */
+.profile_inner, .post-entry, .post-single {
+    background: rgba(255, 255, 255, 0.7) !important; /* Белая подложка с прозрачностью */
+    backdrop-filter: blur(10px); /* Размытие фона под карточкой */
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Для темной темы (если включена) */
+.dark .profile_inner, .dark .post-entry, .dark .post-single {
+    background: rgba(20, 20, 20, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
