@@ -1,42 +1,41 @@
-/* 1. ФОН САЙТА */
+/* 1. ФОН */
 html, body {
     background-image: url("/indmi-art/images/bg.gif") !important;
     background-size: cover !important;
     background-attachment: fixed !important;
     background-position: center !important;
-    background-color: #000 !important; /* База, чтобы не моргало белым */
+    background-color: #000 !important;
 }
 
-/* 2. УДАЛЯЕМ ПЛАШКИ (чтобы видеть гифку сквозь контент) */
-.main, .post-entry, .profile_inner, .header, .footer, .list, .page {
+/* 2. ПРОЗРАЧНОСТЬ КОНТЕЙНЕРОВ (Магии здесь быть НЕ должно) */
+.main, .post-entry, .profile_inner, .header, .footer, .post-content, .entry-content, .post-single {
     background: transparent !important;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
+    mix-blend-mode: normal !important; /* Убеждаемся, что контейнер не инвертирует детей */
 }
 
-/* 3. МАГИЯ ТОЛЬКО ДЛЯ ТЕКСТА (Инверсия) */
-/* Мы перечисляем только текстовые теги, не трогая контейнеры с фото */
+/* 3. МАГИЯ ТОЛЬКО ДЛЯ ТЕКСТА */
+/* Применяем инверсию точечно к буквам */
 h1, h2, h3, h4, h5, h6, 
 p, span, li, a, time, 
 .post-description, .post-meta, .entry-header h2,
-.logo a, #menu a, .social-icons a {
+.logo a, #menu a, .social-icons a, .buttons a {
     mix-blend-mode: difference !important;
-    color: #ffffff !important; /* Белый обязателен для корректной инверсии */
-}
-
-/* 4. ЗАЩИТА ИЗОБРАЖЕНИЙ И ВИДЕО */
-/* Принудительно выводим медиа в нормальный режим */
-img, video, iframe, .post-cover img, .entry-content img, .post-content img {
-    mix-blend-mode: normal !important;
-    isolation: isolate !important; /* Создает независимый слой для рендеринга */
+    color: #ffffff !important;
     position: relative;
-    z-index: 1;
+    z-index: 2; /* Текст выше картинок */
 }
 
-/* 5. КНОПКИ (чтобы были видны) */
-.buttons a {
-    border: 1px solid #ffffff !important;
-    padding: 5px 10px;
-    border-radius: 5px;
+/* 4. ЖЕСТКАЯ ЗАЩИТА ИЗОБРАЖЕНИЙ */
+/* isolation: isolate заставляет браузер считать это фото отдельным миром */
+img, video, iframe, .post-cover, .entry-content img, .post-content img {
+    mix-blend-mode: normal !important;
+    isolation: isolate !important;
+    position: relative;
+    z-index: 1; /* Картинки под текстом */
+    filter: none !important; /* На всякий случай отключаем фильтры темы */
+}
+
+/* 5. УБИРАЕМ ТЕМНЫЙ ФИЛЬТР С ОБЛОЖЕК (если есть) */
+.post-cover img {
+    opacity: 1 !important;
 }
