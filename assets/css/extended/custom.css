@@ -46,3 +46,16 @@ h1, h2, h3, p, span, a {
     mix-blend-mode: difference !important;
     color: #ffffff !important;
 }
+
+/* Возвращаем нормальные цвета изображениям и видео */
+img, video, iframe, .post-content img, .entry-content img {
+    mix-blend-mode: normal !important;
+    isolation: isolate; /* Создает отдельный слой отрисовки */
+    position: relative; /* Помогает слоям правильно распределиться */
+    z-index: 10;
+}
+
+/* Если у вас есть обложки (Cover images) в PaperMod */
+.post-cover img {
+    mix-blend-mode: normal !important;
+}
