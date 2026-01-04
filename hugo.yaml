@@ -3,6 +3,8 @@ languageCode: ru-ru
 title: "Indmi Art"
 theme: "PaperMod"
 
+defaultContentLanguage: "ru"
+
 params:
   defaultTheme: auto
   showCodeCopyButtons: true
@@ -23,7 +25,7 @@ languages:
     menu:
       main:
         - identifier: installations
-          name: "Инсталляции"
+          name: "Инсталляция"
           url: /posts/installations/
           weight: 10
         - identifier: photography
