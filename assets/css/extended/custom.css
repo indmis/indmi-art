@@ -1,56 +1,48 @@
-/* 1. ГЛОБАЛЬНЫЙ ФОН (Применяем к html, чтобы был под всем сайтом) */
-html.home, 
-html.home body {
+/* 1. ОБЩИЙ ФОН ДЛЯ ГЛАВНОЙ */
+body.home {
+    /* Обязательно проверьте, что файл называется bg.gif и лежит в static/images/ */
     background-image: url("/indmi-art/images/bg.gif") !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-color: #000 !important;
+    /* Мы убрали background-attachment: fixed, так как он ломает мобильные версии */
 }
 
-/* Фикс для мобильных: отключаем 'fixed', так как он ломает отображение на iOS/Android */
-@media (max-width: 768px) {
-    html.home, html.home body {
-        background-attachment: scroll !important;
-    }
-}
-@media (min-width: 769px) {
-    html.home, html.home body {
-        background-attachment: fixed !important;
-    }
-}
-
-/* 2. ПРОЗРАЧНОСТЬ (Убираем всё, что может закрыть фон) */
+/* 2. ПРОЗРАЧНОСТЬ КОНТЕЙНЕРОВ НА ГЛАВНОЙ */
+/* Убираем все плашки, которые могут закрыть собой гифку */
 .home .main, 
 .home .profile_inner, 
 .home .header, 
-.home .footer,
-.home .list,
-.home .page {
+.home .footer {
     background: transparent !important;
     background-color: transparent !important;
     box-shadow: none !important;
     border: none !important;
 }
 
-/* 3. МАГИЯ ТЕКСТА (Инверсия) */
-/* Ограничиваем только текстовыми элементами, чтобы не задеть фото */
-.home h1, .home h2, .home h3, .home p, .home span, 
-.home a, .home li, .home time, .home .profile_description {
+/* 3. МАГИЯ ТЕКСТА (ИНВЕРСИЯ) */
+/* Работает только на главной, делает текст белым и инвертирует его */
+.home h1, 
+.home h2, 
+.home h3, 
+.home p, 
+.home span, 
+.home a, 
+.home .profile_description {
     mix-blend-mode: difference !important;
     color: #ffffff !important;
 }
 
-/* 4. ОЧИСТКА ВНУТРЕННИХ СТРАНИЦ (Галерейный режим) */
+/* 4. ЧИСТОТА ВНУТРИ ПРОЕКТОВ */
+/* Когда мы уходим с главной (класс .home исчезает), 
+   фон становится стандартным для темы */
 body:not(.home) {
     background-image: none !important;
-    background-color: var(--theme) !important;
+    background-color: var(--theme);
 }
 
-/* Защита фото внутри проектов */
-body:not(.home) img, 
-body:not(.home) video, 
-body:not(.home) iframe {
+/* На всякий случай: защита картинок внутри постов от инверсии */
+.post-content img, .entry-content img, .post-cover img {
     mix-blend-mode: normal !important;
-    isolation: isolate !important;
 }
