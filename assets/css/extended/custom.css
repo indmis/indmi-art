@@ -1,40 +1,77 @@
 /* 1. ГИФКА ТОЛЬКО НА ГЛАВНОЙ */
-.home {
+/* Добавляем .main, так как на мобильных тема часто вешает фон на него */
+.home, .home body, .home .main {
     background-image: url("/indmi-art/images/bg.gif") !important;
     background-size: cover !important;
-    background-attachment: fixed !important;
     background-position: center !important;
     background-color: #000 !important;
+    background-repeat: no-repeat !important;
+}
+
+/* На мобильных fixed-фон часто не отображается, меняем на scroll */
+@media (max-width: 768px) {
+    .home, .home body, .home .main {
+        background-attachment: scroll !important;
+    }
+}
+
+/* На десктопах оставляем эффект фиксации */
+@media (min-width: 769px) {
+    .home, .home body, .home .main {
+        background-attachment: fixed !important;
+    }
 }
 
 /* 2. МАГИЯ ТОЛЬКО НА ГЛАВНОЙ */
-/* Используем класс .home перед всеми элементами */
-.home .profile_inner, 
+/* Принудительно убираем любые фоны у контейнеров на главной */
+.home .main, .home .profile_inner, .home .header, .home .footer {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Сама инверсия текста */
 .home .profile_inner h1, 
 .home .profile_inner .profile_description,
-.home .header,
 .home .header a,
 .home #menu a,
-.home .social-icons a {
+.home .social-icons a,
+.home .buttons a {
     mix-blend-mode: difference !important;
     color: #ffffff !important;
     background: transparent !important;
 }
 
 /* 3. ОЧИСТКА ВНУТРЕННИХ СТРАНИЦ */
-/* Убеждаемся, что на страницах проектов всё стандартно */
+/* На страницах проектов всё стандартно и чисто */
 body:not(.home) {
     background-image: none !important;
-    /* Здесь можно задать цвет фона для всех страниц кроме главной */
     background-color: var(--theme) !important; 
 }
 
-/* Возвращаем стандартный вид тексту на внутренних страницах */
+/* Защита изображений внутри проектов (чтобы не было негатива) */
+body:not(.home) img, 
+body:not(.home) video, 
+body:not(.home) iframe {
+    mix-blend-mode: normal !important;
+    isolation: isolate !important;
+}
+
+/* Возвращаем стандартный вид тексту вне главной */
 body:not(.home) a, 
 body:not(.home) p, 
 body:not(.home) h1 {
     mix-blend-mode: normal !important;
 }
 
-/* 4. ФИКС ДЛЯ 404 (по желанию) */
-/* Если хотите гифку и на 404, добавьте класс .error404 по аналогии с .home */
+/* 4. ФИКС ДЛЯ 404 */
+.error404 {
+    background-image: url("/indmi-art/images/bg.gif") !important;
+    background-size: cover !important;
+    background-position: center !important;
+}
+.error404 h1, .error404 p, .error404 a {
+    mix-blend-mode: difference !important;
+    color: #fff !important;
+}
