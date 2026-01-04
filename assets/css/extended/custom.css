@@ -1,0 +1,18 @@
+body {
+    background-image: url("/indmi-art/images/bg.gif");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+/* Чтобы контент был читаемым на фоне гифки, 
+добавим немного прозрачности карточкам */
+.profile_inner, .post-entry {
+    background: rgba(255, 255, 255, 0.8); /* Светлая тема */
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.dark .profile_inner, .dark .post-entry {
+    background: rgba(30, 30, 30, 0.8); /* Темная тема */
+}
