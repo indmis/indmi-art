@@ -1,36 +1,58 @@
-/* 1. ГИФКА ТОЛЬКО НА ГЛАВНОЙ */
-body.home {
+/* 1. ГИФКА НА ФОНЕ (Для всех страниц изначально) */
+body {
     background-image: url("/indmi-art/images/bg.gif") !important;
     background-size: cover !important;
     background-position: center !important;
-    background-attachment: fixed !important;
+    background-repeat: no-repeat !important;
     background-color: #000 !important;
+    /* Убираем fixed для мобильных, чтобы не исчезало */
+    background-attachment: scroll !important; 
 }
 
-/* 2. МАГИЯ ТОЛЬКО НА ГЛАВНОЙ И ТОЛЬКО ДЛЯ ТЕКСТА */
-/* Мы добавляем .home в начало каждого правила, чтобы внутри проектов этого не происходило */
-.home h1, .home h2, .home h3, .home p, .home span, 
-.home a, .home li, .home time, .home .profile_description {
+/* На десктопе возвращаем эффект фиксации */
+@media (min-width: 769px) {
+    body {
+        background-attachment: fixed !important;
+    }
+}
+
+/* 2. МАГИЯ ТОЛЬКО ДЛЯ ГЛАВНОЙ */
+/* Мы используем селектор :has(.profile), чтобы магия работала только когда на странице есть блок профиля */
+body:has(.profile) h1, 
+body:has(.profile) span, 
+body:has(.profile) .header a, 
+body:has(.profile) #menu a, 
+body:has(.profile) .social-icons a,
+body:has(.profile) .button-inner,
+body:has(.profile) .footer span,
+body:has(.profile) .footer a {
     mix-blend-mode: difference !important;
     color: #ffffff !important;
 }
 
-/* 3. ПРОЗРАЧНОСТЬ КОНТЕЙНЕРОВ ТОЛЬКО НА ГЛАВНОЙ */
-.home .main, .home .profile_inner, .home .header, .home .footer {
+/* Убираем лишние фоны и тени на главной */
+body:has(.profile) .main,
+body:has(.profile) .header,
+body:has(.profile) .footer,
+body:has(.profile) .profile_inner {
     background: transparent !important;
-    background-color: transparent !important;
     box-shadow: none !important;
 }
 
-/* 4. ЧИСТОТА ВНУТРИ ПРОЕКТОВ (ГАЛЕРЕЙНЫЙ РЕЖИМ) */
-/* Когда мы НЕ на главной, магия и гифка отключаются полностью */
-body:not(.home) {
+/* 3. ОЧИСТКА ВНУТРЕННИХ СТРАНИЦ (ГАЛЕРЕЯ) */
+/* Если блока .profile на странице НЕТ (значит это проект), убираем гифку и магию */
+body:not(:has(.profile)) {
     background-image: none !important;
-    background-color: var(--theme) !important; /* Белый или черный фон темы */
+    background-color: var(--theme) !important;
 }
 
-/* Принудительно отключаем инверсию для всех медиа на всякий случай */
-img, video, iframe, .post-cover img {
+/* Возвращаем нормальный режим для текста в проектах */
+body:not(:has(.profile)) * {
+    mix-blend-mode: normal !important;
+}
+
+/* 4. ЗАЩИТА МЕДИА ВНУТРИ ПРОЕКТОВ */
+img, video, iframe {
     mix-blend-mode: normal !important;
     isolation: isolate !important;
 }
