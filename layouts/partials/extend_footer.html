@@ -1,0 +1,31 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Ищем ссылки на изображения в контенте и в сетке
+    var images = document.querySelectorAll('.post-content a[href$=".jpg"], .post-content a[href$=".png"], .post-content a[href$=".webp"], .photo-grid a');
+    
+    if (images.length > 0) {
+      images.forEach(function(el) {
+        new Luminous(el, {
+          closeOnScroll: true,      // Закрыть при скролле (удобно на мобилках)
+          closeTrigger: 'click',    // Закрывать по клику
+          sendToCanvas: true        // Помогает корректно обрабатывать клики вне фото
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Добавим стилей, чтобы область вокруг фото была кликабельной для закрытия */
+  .lum-lightbox {
+    z-index: 10000;
+    cursor: zoom-out; /* Меняет курсор на "минус", подсказывая, что клик закроет фото */
+  }
+  .lum-lightbox-inner {
+    cursor: default; /* На самом фото курсор обычный */
+  }
+  /* Затемнение фона */
+  .lum-lightbox-background {
+    background: rgba(0, 0, 0, 0.9) !important;
+  }
+</style>
