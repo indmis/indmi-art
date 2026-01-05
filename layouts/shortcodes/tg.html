@@ -1,17 +1,17 @@
 <div class="tg-video-crop" style="
     width: 100%; 
-    max-width: {{ if eq (.Get 1) 'vert' }}400px{{ else }}700px{{ end }}; 
+    max-width: {{ if eq (.Get 1) "vert" }}400px{{ else }}700px{{ end }}; 
     margin: 20px auto; 
     overflow: hidden; 
     border-radius: 12px;
     background: #000;
 ">
-    <!-- Сдвигаем iframe вверх и в стороны, чтобы скрыть аватарку и подвал телеграма -->
-    <div style="margin-top: -50px; margin-bottom: -40px;">
+    <!-- Сдвигаем iframe, чтобы скрыть аватарку и подвал телеграма -->
+    <div style="margin-top: -50px; margin-bottom: -50px;">
         <iframe 
-            src="https://t.me/{{ .Get 0 }}?embed=1" 
+            src="t.me{{ .Get 0 }}?embed=1" 
             width="100%" 
-            {{ if eq (.Get 1) "vert" }}height="600"{{ else }}height="450"{{ end }}
+            height="{{ if eq (.Get 1) "vert" }}650{{ else }}450{{ end }}"
             frameborder="0" 
             scrolling="no" 
             style="border: none;">
