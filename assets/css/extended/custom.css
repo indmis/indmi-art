@@ -1,48 +1,30 @@
-/* 1. ОБЩИЙ ФОН ДЛЯ ГЛАВНОЙ */
-body.home {
-    /* Обязательно проверьте, что файл называется bg.gif и лежит в static/images/ */
+/* 1. ГИФКА НА ВЕСЬ САЙТ (Работает на всех страницах) */
+html, body {
     background-image: url("/indmi-art/images/bg.gif") !important;
     background-size: cover !important;
     background-position: center !important;
-    background-repeat: no-repeat !important;
+    background-attachment: fixed !important; /* На десктопе будет красиво */
     background-color: #000 !important;
-    /* Мы убрали background-attachment: fixed, так как он ломает мобильные версии */
 }
 
-/* 2. ПРОЗРАЧНОСТЬ КОНТЕЙНЕРОВ НА ГЛАВНОЙ */
-/* Убираем все плашки, которые могут закрыть собой гифку */
-.home .main, 
-.home .profile_inner, 
-.home .header, 
-.home .footer {
+/* 2. ПОЛНАЯ ПРОЗРАЧНОСТЬ КОНТЕЙНЕРОВ */
+.main, .post-entry, .profile_inner, .header, .footer, .list, .page, .post-content {
     background: transparent !important;
     background-color: transparent !important;
     box-shadow: none !important;
     border: none !important;
 }
 
-/* 3. МАГИЯ ТЕКСТА (ИНВЕРСИЯ) */
-/* Работает только на главной, делает текст белым и инвертирует его */
-.home h1, 
-.home h2, 
-.home h3, 
-.home p, 
-.home span, 
-.home a, 
-.home .profile_description {
+/* 3. МАГИЯ ТЕКСТА (Инверсия везде) */
+h1, h2, h3, h4, h5, h6, p, span, a, li, time, .logo a, #menu a {
     mix-blend-mode: difference !important;
     color: #ffffff !important;
 }
 
-/* 4. ЧИСТОТА ВНУТРИ ПРОЕКТОВ */
-/* Когда мы уходим с главной (класс .home исчезает), 
-   фон становится стандартным для темы */
-body:not(.home) {
-    background-image: none !important;
-    background-color: var(--theme);
+/* 4. ЗАЩИТА ФОТО (Чтобы они хотя бы не были негативом) */
+img, video, iframe {
+    mix-blend-mode: normal !important;
+    isolation: isolate !important;
 }
 
-/* На всякий случай: защита картинок внутри постов от инверсии */
-.post-content img, .entry-content img, .post-cover img {
-    mix-blend-mode: normal !important;
-}
+/* Фикс для мобильных: если гифка пропадет на телефоне, мы это поправим позже */
