@@ -1,0 +1,19 @@
+{{ define "main" }}
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+</header>
+
+<div class="video-feed">
+  {{ range .Pages.ByDate.Reverse }}
+    <article class="video-post" style="margin-bottom: 80px; border-bottom: 1px solid #eee; padding-bottom: 40px;">
+      <h2 style="margin-bottom: 20px;">{{ .Title }}</h2>
+      <div class="video-content">
+        {{ .Content }}
+      </div>
+      <div class="video-meta" style="margin-top: 15px; font-size: 0.8em; opacity: 0.7;">
+        {{ .Date.Format "January 2006" }}
+      </div>
+    </article>
+  {{ end }}
+</div>
+{{ end }}
