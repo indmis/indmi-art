@@ -1,6 +1,17 @@
-<div class="tg-video-container" style="width: 100%; max-width: 600px; margin: 20px 0; min-height: 200px;">
-    <script async src="telegram.org" 
-            data-telegram-post="{{ .Get 0 }}" 
-            data-width="100%"
-            data-userpic="false"></script>
+<div class="tg-video-wrapper" style="width: 100%; max-width: 100%; margin: 20px auto; overflow: hidden;">
+    <iframe id="tg-post-{{ .Get 0 | urlize }}" 
+            src="t.me{{ .Get 0 }}?embed=1" 
+            width="100%" 
+            frameborder="0" 
+            scrolling="no" 
+            style="border: none; overflow: hidden; min-height: 400px;">
+    </iframe >
+    <script>
+        // Скрипт для автоматической подстройки высоты фрейма
+        window.addEventListener('message', function(e) {
+            if (e.data.event === 'resize') {
+                document.getElementById('tg-post-{{ .Get 0 | urlize }}').style.height = e.data.height + 'px';
+            }
+        }, false);
+    </script>
 </div>

@@ -1,16 +1,23 @@
-baseURL: "https://github.com/indmis/indmi-art" # Обязательно со слэшем в конце!
+# 1. ИСПРАВЛЕННЫЙ BASEURL (должен вести на сайт, а не на репозиторий)
+baseURL: "indmis.github.io"
 languageCode: ru-ru
 title: "Indmi Art"
 theme: "PaperMod"
 
 defaultContentLanguage: "ru"
 
+# 2. РАЗРЕШАЕМ HTML ВНУТРИ MARKDOWN (Чтобы видео работало)
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
 params:
   defaultTheme: auto
   showCodeCopyButtons: true
-  params:
-  showFullTextContent: false # Чтобы на главной не вываливался весь текст проектов
+  showFullTextContent: false 
   displayFullPostContent: false
+  
   profileMode:
     enabled: true
     title: "Indmi Art"
@@ -38,9 +45,9 @@ languages:
           weight: 30
         - identifier: video
           name: "Видео"
-          url: /posts/video
+          url: /posts/video/
           weight: 35
         - identifier: about
           name: "Обо мне"
-          url: /about/ # Эту страницу можно создать позже
+          url: /about/
           weight: 40
