@@ -9,7 +9,7 @@
     <!-- Сдвигаем iframe, чтобы скрыть аватарку и подвал телеграма -->
     <div style="margin-top: -50px; margin-bottom: -50px;">
         <iframe 
-            src="t.me{{ .Get 0 }}?embed=1" 
+            src="https://t.me/{{ .Get 0 }}?embed=1" 
             width="100%" 
             height="{{ if eq (.Get 1) "vert" }}650{{ else }}450{{ end }}"
             frameborder="0" 
