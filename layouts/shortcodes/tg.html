@@ -1,5 +1,5 @@
-{{ $ratio := "16 / 9" }}
-{{ if eq (.Get 1) "vert" }}{{ $ratio = "9 / 16" }}{{ end }}
+{{ $ratio := "9 / 16" }}
+{{ if eq (.Get 1) "vert" }}{{ $ratio = "16 / 9" }}{{ end }}
 {{ if eq (.Get 1) "sq" }}{{ $ratio = "1 / 1" }}{{ end }}
 
 <div class="tg-video-container" style="
