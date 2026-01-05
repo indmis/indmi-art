@@ -43,10 +43,6 @@ languages:
           name: "Звук"
           url: /posts/sound/
           weight: 30
-        - identifier: video
-          name: "Видео"
-          url: /posts/video/
-          weight: 35
         - identifier: about
           name: "Обо мне"
           url: /about/

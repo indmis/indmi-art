@@ -1,5 +1,6 @@
 ---
 title: "Видеоарт"
-layout: "video-stream" # Это ключ! Мы создадим такой шаблон ниже
+layout: "video-stream"
 weight: 40
+draft: true   # <--- Эта строка скроет весь раздел
 ---
