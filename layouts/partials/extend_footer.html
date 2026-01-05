@@ -1,40 +1,24 @@
-<!-- 1. Сначала стили -->
-<link rel="stylesheet" href="cdnjs.cloudflare.com">
-
-<!-- 2. Скрипт библиотеки с триггером инициализации -->
-<script src="cdnjs.cloudflare.com" onload="initLightbox()"></script>
+<!-- Библиотека Luminous (Inline-версия для стабильности 2026) -->
+<style>
+/* Базовые стили Luminous */
+@keyframes lum-fadein{0%{opacity:0}to{opacity:1}}@keyframes lum-fadeout{0%{opacity:1}to{opacity:0}}@keyframes lum-fadeYin{0%{opacity:0;transform:translateY(-40px)}to{opacity:1;transform:translateY(0)}}@keyframes lum-fadeYout{0%{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-40px)}}.lum-lightbox{position:fixed;display:none;top:0;right:0;bottom:0;left:0;z-index:10000;cursor:zoom-out}.lum-lightbox.lum-open{display:block}.lum-lightbox-background{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.9);animation:lum-fadein .4s ease}.lum-lightbox-inner{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;animation:lum-fadeYin .4s ease}.lum-lightbox-inner img{max-width:90vw;max-height:90vh;box-shadow:0 0 30px rgba(0,0,0,.5);cursor:default}
+</style>
 
 <script>
-  function initLightbox() {
-    // Эта функция сработает только когда библиотека точно загружена
-    var images = document.querySelectorAll('.post-content a[href$=".jpg"], .post-content a[href$=".png"], .post-content a[href$=".webp"], .photo-grid a');
-    
-    if (images.length > 0) {
-      images.forEach(function(el) {
-        new Luminous(el, {
-          closeOnScroll: true,
-          closeTrigger: 'click', // Закрытие по клику в любую область
-          appendToNode: document.body // Гарантирует правильное наложение слоев
-        });
-      });
-    }
-  }
-</script>
+/**
+ * Мини-версия Luminous для вставки напрямую
+ */
+!function(){"use strict";function e(t,i){return this instanceof e?(this.el=t,this.options=i||{},void this._init()):new e(t,i)}e.prototype._init=function(){var e=this;this.el.addEventListener("click",function(t){t.preventDefault(),e.open()})},e.prototype.open=function(){var e=this,t=document.createElement("div");t.className="lum-lightbox",t.innerHTML='<div class="lum-lightbox-background"></div><div class="lum-lightbox-inner"><img src="'+this.el.getAttribute("href")+'"></div>',document.body.appendChild(t),t.classList.add("lum-open"),t.addEventListener("click",function(){t.classList.remove("lum-open"),setTimeout(function(){t.remove()},400)})},window.Luminous=e}();
 
-<style>
-  /* Стили для удобства закрытия */
-  .lum-lightbox {
-    z-index: 10000;
-    cursor: pointer; /* Показывает, что клик в пустоту закроет фото */
-  }
-  .lum-lightbox-inner {
-    cursor: default;
-  }
-  .lum-lightbox-background {
-    background: rgba(0, 0, 0, 0.9) !important;
-  }
-  /* Фикс для мобильных (чтобы кнопки закрытия не перекрывались) */
-  .lum-close-button {
-    display: none; /* Часто она лишняя, если работает клик по фону */
-  }
-</style>
+/**
+ * Инициализация
+ */
+document.addEventListener("DOMContentLoaded", function() {
+    var images = document.querySelectorAll('.post-content a[href$=".jpg"], .post-content a[href$=".png"], .post-content a[href$=".webp"], .photo-grid a');
+    if (window.Luminous) {
+        images.forEach(function(el) {
+            new Luminous(el);
+        });
+    }
+});
+</script>
