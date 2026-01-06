@@ -36,34 +36,41 @@
         <h1>{{ .Title }}</h1>
     </header>
 
-    {{/* .Pages видит и вложенные папки-разделы, и посты */}}
     <div class="list-container">
-    {{- $list_pages := .Pages -}}
-    {{- range $list_pages -}}
+    {{/* 1. Сначала ищем вложенные разделы (папки типа Photo, Installation) */}}
+    {{- range .Sections -}}
     <article class="post-entry project-card">
-        
-        {{/* Пытаемся найти обложку в ресурсах текущей папки */}}
         {{- $cover := .Resources.GetMatch (.Params.cover.image | default "cover.webp") -}}
-
         <div class="entry-cover">
             {{- if $cover -}}
                 <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}">
             {{- else -}}
-                {{/* Если обложки нет, рисуем пустой блок с фоном, чтобы не ломать сетку */}}
-                <div class="placeholder" style="background: #1a1a1a; width:100%; height:100%; display: flex; align-items: center; justify-content: center; color: #444; font-size: 0.8rem;">
-                    {{ .Title }}
-                </div>
+                <div class="placeholder" style="background: #1a1a1a; width:100%; height:100%;"></div>
             {{- end -}}
         </div>
+        <header class="entry-header"><h2>{{ .Title }}</h2></header>
+        <a class="entry-link" href="{{ .RelPermalink }}"></a>
+    </article>
+    {{- end -}}
 
-        <header class="entry-header">
-            <h2>{{ .Title }}</h2>
-        </header>
+    {{/* 2. Затем ищем обычные страницы (конечные посты) */}}
+    {{- range .Pages -}}
+    <article class="post-entry project-card">
+        {{- $cover := .Resources.GetMatch (.Params.cover.image | default "cover.webp") -}}
+        <div class="entry-cover">
+            {{- if $cover -}}
+                <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}">
+            {{- else -}}
+                <div class="placeholder" style="background: #1a1a1a; width:100%; height:100%;"></div>
+            {{- end -}}
+        </div>
+        <header class="entry-header"><h2>{{ .Title }}</h2></header>
         <a class="entry-link" href="{{ .RelPermalink }}"></a>
     </article>
     {{- end -}}
     </div>
 {{- end -}}
+
 
 
 {{- end -}}
