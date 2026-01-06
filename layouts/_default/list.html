@@ -1,10 +1,24 @@
 {{- define "main" -}}
 
 {{- if .IsHome -}}
-    {{/* Выводим профиль с гифкой */}}
-    {{- partial "home_info.html" . -}}
-    
-    {{/* НАШИ ДАННЫЕ ДЛЯ РАНДОМА */}}
+    {{/* 1. ПРИНУДИТЕЛЬНЫЙ ВЫВОД ПРОФИЛЯ (ГИФКА, ТЕКСТ, КНОПКИ) */}}
+    <div class="profile">
+        {{- $common_path := (.Site.Params.profileMode.imageUrl | default "") -}}
+        <div class="profile_inner">
+            <h1>{{ .Site.Params.profileMode.title | default .Site.Title }}</h1>
+            <span>{{ .Site.Params.profileMode.subtitle | safeHTML }}</span>
+            <div class="social-icons"></div>
+            <div class="buttons">
+                {{- range .Site.Params.profileMode.buttons }}
+                <a class="button" href="{{ .url | relURL }}" rel="noopener" title="{{ .name }}">
+                    <span class="button-inner">{{ .name }}</span>
+                </a>
+                {{- end }}
+            </div>
+        </div>
+    </div>
+
+    {{/* 2. НАШИ ДАННЫЕ ДЛЯ РАНДОМА */}}
     <div id="projects-pool" style="display: none;">
         {{- range .Site.RegularPages -}}
             {{- if in .RelPermalink "/posts/" -}}
@@ -17,14 +31,22 @@
             {{- end -}}
         {{- end -}}
     </div>
+    
+    {{/* 3. КОНТЕЙНЕР ДЛЯ СЛУЧАЙНЫХ КАРТОЧЕК */}}
     <div id="glitch-display" class="random-projects-container"></div>
 
 {{- else -}}
-    {{/* Код для обычных списков (разделов), чтобы они не сломались */}}
-    {{- if .Content -}}
-    <div class="post-content">{{ .Content }}</div>
+    {{/* Код для обычных разделов (не трогаем) */}}
+    <header class="page-header"><h1>{{ .Title }}</h1></header>
+    {{- if .Content -}}<div class="post-content">{{ .Content }}</div>{{- end -}}
+    {{- range .Paginator.Pages -}}
+        {{/* Стандартный вывод списка постов темы */}}
+        <article class="post-entry">
+            <header class="entry-header"><h2>{{ .Title }}</h2></header>
+            <section class="entry-content"><p>{{ .Summary }}</p></section>
+            <a class="entry-link" href="{{ .RelPermalink }}"></a>
+        </article>
     {{- end -}}
-    {{/* Тут стандартный вывод постов PaperMod... */}}
 {{- end -}}
 
 {{- end -}}
