@@ -74,3 +74,43 @@ img, video, iframe {
 .photo-grid img:hover {
     transform: scale(1.05);
 }
+
+/* Стиль для ссылки на PDF */
+.pdf-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 25px;
+    margin: 20px 0;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Тонкая рамка */
+    border-radius: 8px;
+    text-decoration: none !important;
+    color: inherit;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05); /* Легкий фон */
+}
+
+.pdf-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.pdf-link .pdf-icon {
+    font-size: 24px;
+}
+
+.pdf-link .pdf-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-link .pdf-title {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.pdf-link .pdf-subtitle {
+    font-size: 0.8em;
+    opacity: 0.6;
+}
