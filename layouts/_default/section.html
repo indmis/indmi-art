@@ -37,8 +37,10 @@
     </header>
 
     <div class="list-container">
-    {{/* 1. Сначала ищем вложенные разделы (папки типа Photo, Installation) */}}
-    {{- range .Sections -}}
+    {{/* Объединяем разделы и страницы, оставляя только уникальные */}}
+    {{- $entries := union .Sections .Pages -}}
+    
+    {{- range $entries -}}
     <article class="post-entry project-card">
         {{- $cover := .Resources.GetMatch (.Params.cover.image | default "cover.webp") -}}
         <div class="entry-cover">
@@ -48,23 +50,9 @@
                 <div class="placeholder" style="background: #1a1a1a; width:100%; height:100%;"></div>
             {{- end -}}
         </div>
-        <header class="entry-header"><h2>{{ .Title }}</h2></header>
-        <a class="entry-link" href="{{ .RelPermalink }}"></a>
-    </article>
-    {{- end -}}
-
-    {{/* 2. Затем ищем обычные страницы (конечные посты) */}}
-    {{- range .Pages -}}
-    <article class="post-entry project-card">
-        {{- $cover := .Resources.GetMatch (.Params.cover.image | default "cover.webp") -}}
-        <div class="entry-cover">
-            {{- if $cover -}}
-                <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}">
-            {{- else -}}
-                <div class="placeholder" style="background: #1a1a1a; width:100%; height:100%;"></div>
-            {{- end -}}
-        </div>
-        <header class="entry-header"><h2>{{ .Title }}</h2></header>
+        <header class="entry-header">
+            <h2>{{ .Title }}</h2>
+        </header>
         <a class="entry-link" href="{{ .RelPermalink }}"></a>
     </article>
     {{- end -}}
