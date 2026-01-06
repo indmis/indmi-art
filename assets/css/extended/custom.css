@@ -39,6 +39,27 @@ body:has(.profile) .profile_inner {
     box-shadow: none !important;
 }
 
+/* УМЕНЬШЕНИЕ ПУСТОТЫ НА ГЛАВНОЙ */
+
+/* Сокращаем гигантский отступ самого профиля */
+body:has(.profile) .profile {
+    min-height: auto !important; /* Отменяет растягивание на весь экран */
+    padding-top: 100px !important; /* Отступ сверху от меню */
+    padding-bottom: 20px !important; /* Уменьшаем пустоту снизу */
+}
+
+/* Уменьшаем отступ внутри обертки профиля */
+body:has(.profile) .profile_inner {
+    margin-top: 0 !important;
+}
+
+/* Увеличиваем размер кнопок (Проекты), чтобы они не терялись */
+body:has(.profile) .buttons a.button {
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    border: 1px solid #fff;
+}
+
 /* 3. ОЧИСТКА ВНУТРЕННИХ СТРАНИЦ (ГАЛЕРЕЯ) */
 /* Если блока .profile на странице НЕТ (значит это проект), убираем гифку и магию */
 body:not(:has(.profile)) {
