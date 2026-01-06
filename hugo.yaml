@@ -19,7 +19,12 @@ params:
   showCodeCopyButtons: true
   showFullTextContent: false 
   displayFullPostContent: false
-  
+  mainSections:
+    - posts
+    - installation
+    - photo
+    - sound
+    - object
   profileMode:
     enabled: true
     title: "Indmi Art"
