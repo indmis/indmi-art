@@ -42,27 +42,29 @@
     <div class="post-content">{{ .Content }}</div>
     {{- end }}
 
-    {{/* Вывод карточек постов */}}
+    {{/* Вывод карточек постов с обложками */}}
     {{- $pages := .Paginator.Pages -}}
-    {{- range $pages }}
-    <article class="post-entry">
-        <header class="entry-header">
-            <h2>{{ .Title }}</h2>
-        </header>
-        {{- if .Params.cover.image }}
-        <div class="entry-content">
-            {{- $resource := .Resources.GetMatch .Params.cover.image -}}
-            {{- if $resource }}
-                <img src="{{ $resource.RelPermalink }}" alt="{{ .Title }}" style="max-width:100%; height:auto; margin-bottom:15px;">
+    <div class="list-container">
+        {{- range $pages }}
+        <article class="post-entry project-card">
+            {{- if .Params.cover.image }}
+            <div class="entry-cover">
+                {{- $resource := .Resources.GetMatch .Params.cover.image -}}
+                {{- if $resource }}
+                    <img src="{{ $resource.RelPermalink }}" alt="{{ .Title }}">
+                {{- end }}
+            </div>
             {{- end }}
-        </div>
+            
+            <header class="entry-header">
+                <h2>{{ .Title }}</h2>
+            </header>
+            
+            {{/* Ссылка на всю область карточки */}}
+            <a class="entry-link" href="{{ .RelPermalink }}"></a>
+        </article>
         {{- end }}
-        <footer class="entry-footer">
-            {{- if .Date }}<span>{{ .Date.Format "02.01.2006" }}</span>{{- end }}
-        </footer>
-        <a class="entry-link" href="{{ .RelPermalink }}"></a>
-    </article>
-    {{- end }}
+
 
     {{/* Пагинация */}}
     {{- if gt .Paginator.TotalPages 1 }}

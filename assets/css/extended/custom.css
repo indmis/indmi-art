@@ -197,3 +197,55 @@ img, video, iframe {
     }
 }
 
+/* Сетка для разделов (Инсталляция, Фото и т.д.) */
+.list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+/* Стилизация отдельной карточки проекта */
+.project-card {
+    position: relative;
+    background: var(--entry);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border);
+    margin: 0 !important; /* Убираем стандартные отступы PaperMod */
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.project-card .entry-cover {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.project-card .entry-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-card .entry-header {
+    padding: 15px;
+}
+
+.project-card .entry-header h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 768px) {
+    .list-container {
+        grid-template-columns: 1fr;
+    }
+}
