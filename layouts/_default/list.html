@@ -1,7 +1,7 @@
 {{- define "main" -}}
 
 {{- if or (.IsHome) (eq .RelPermalink "/indmi-art/") -}}
-    {{/* 1. ПРИНУДИТЕЛЬНЫЙ ВЫВОД ПРОФИЛЯ */}}
+    {{/* --- КОД ДЛЯ ГЛАВНОЙ (БЕЗ ИЗМЕНЕНИЙ) --- */}}
     <div class="profile">
         <div class="profile_inner">
             <h1>{{ .Site.Params.profileMode.title | default "Indmi Art" }}</h1>
@@ -17,7 +17,6 @@
         </div>
     </div>
 
-    {{/* 2. ДАННЫЕ ДЛЯ РАНДОМА */}}
     <div id="projects-pool" style="display: none;">
         {{- range .Site.RegularPages -}}
             {{- if in .RelPermalink "/posts/" -}}
@@ -30,22 +29,54 @@
             {{- end -}}
         {{- end -}}
     </div>
-    
-    {{/* 3. КОНТЕЙНЕР ДЛЯ ВЫВОДА */}}
     <div id="glitch-display" class="random-projects-container"></div>
 
 {{- else -}}
-    {{/* Код для разделов (Инсталляции, Фото и т.д.) */}}
-    <header class="page-header"><h1>{{ .Title }}</h1></header>
-    {{- if .Content -}}<div class="post-content">{{ .Content }}</div>{{- end -}}
-    <div class="list-container">
-        {{- range .Paginator.Pages -}}
-        <article class="post-entry">
-            <header class="entry-header"><h2>{{ .Title }}</h2></header>
-            <a class="entry-link" href="{{ .RelPermalink }}"></a>
-        </article>
-        {{- end -}}
-    </div>
-{{- end -}}
+    {{/* --- КОД ДЛЯ СТРАНИЦ СПИСКОВ (ПРОЕКТЫ, ИНСТАЛЛЯЦИИ И Т.Д.) --- */}}
+    <header class="page-header">
+        <h1>{{ .Title }}</h1>
+        {{- if .Description }}<div class="post-description">{{ .Description }}</div>{{- end }}
+    </header>
 
+    {{- if .Content }}
+    <div class="post-content">{{ .Content }}</div>
+    {{- end }}
+
+    {{/* ВОЗВРАЩАЕМ СТАНДАРТНЫЙ ЦИКЛ PAPERMOD */}}
+    {{- $pages := .Paginator.Pages -}}
+    {{- range $pages }}
+    <article class="post-entry">
+        {{- $header_class := "" -}}
+        {{- if (.Param "ShowPostNavLinks") }} {{ $header_class = "entry-header" }} {{- end }}
+        <header class="{{ $header_class }}">
+            <h2>{{ .Title }}</h2>
+        </header>
+        {{- if (index .Params "cover") -}}
+            {{- partial "cover.html" (dict "cxt" . "IsSingle" false "IsHome" false) -}}
+        {{- end }}
+        <section class="entry-content">
+            <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+        </section>
+        <footer class="entry-footer">
+            {{- partial "post_meta.html" . -}}
+        </footer>
+        <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .RelPermalink }}"></a>
+    </article>
+    {{- end }}
+
+    {{/* Пагинация (если проектов будет очень много) */}}
+    {{- if gt .Paginator.TotalPages 1 }}
+    <footer class="page-footer">
+        <nav class="pagination">
+            {{- if .Paginator.HasPrev }}
+            <a class="prev" href="{{ .Paginator.Prev.URL | relURL }}">« Prev</a>
+            {{- end }}
+            {{- if .Paginator.HasNext }}
+            <a class="next" href="{{ .Paginator.Next.URL | relURL }}">Next »</a>
+            {{- end }}
+        </nav>
+    </footer>
+    {{- end }}
+
+{{- end -}}
 {{- end -}}
