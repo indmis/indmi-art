@@ -37,24 +37,32 @@
     </header>
 
     <div class="list-container">
-    {{/* Объединяем разделы и страницы, оставляя только уникальные */}}
-    {{- $entries := union .Sections .Pages -}}
+    {{/* Собираем всё в один массив */}}
+    {{- $all := .Sections | append .Pages -}}
     
-    {{- range $entries -}}
-    <article class="post-entry project-card">
-        {{- $cover := .Resources.GetMatch (.Params.cover.image | default "cover.webp") -}}
-        <div class="entry-cover">
-            {{- if $cover -}}
-                <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}">
-            {{- else -}}
-                <div class="placeholder" style="background: #1a1a1a; width:100%; height:100%;"></div>
-            {{- end -}}
-        </div>
-        <header class="entry-header">
-            <h2>{{ .Title }}</h2>
-        </header>
-        <a class="entry-link" href="{{ .RelPermalink }}"></a>
-    </article>
+    {{/* Создаем пустой список для уникальных путей */}}
+    {{- $unique_links := slice -}}
+    
+    {{- range $all -}}
+        {{/* Проверяем, выводили ли мы уже эту ссылку */}}
+        {{- if not (in $unique_links .RelPermalink) -}}
+            {{- $unique_links = $unique_links | append .RelPermalink -}}
+            
+            <article class="post-entry project-card">
+                {{- $cover := .Resources.GetMatch (.Params.cover.image | default "cover.webp") -}}
+                <div class="entry-cover">
+                    {{- if $cover -}}
+                        <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}">
+                    {{- else -}}
+                        <div class="placeholder" style="background: #1a1a1a; width:100%; height:100%;"></div>
+                    {{- end -}}
+                </div>
+                <header class="entry-header">
+                    <h2>{{ .Title }}</h2>
+                </header>
+                <a class="entry-link" href="{{ .RelPermalink }}"></a>
+            </article>
+        {{- end -}}
     {{- end -}}
     </div>
 {{- end -}}
