@@ -1,0 +1,21 @@
+{{ define "main" }}
+{{ if .IsHome }}
+    {{ partial "home_info.html" . }}
+    
+    {{/* Наш блок данных и вывода */}}
+    <div id="projects-pool" style="display: none;">
+        {{ range .Site.RegularPages }}
+            {{ if in .RelPermalink "/posts/" }}
+                {{ $img := "" }}
+                {{ if .Params.cover.image }}
+                    {{ $resource := .Resources.GetMatch .Params.cover.image }}
+                    {{ if $resource }} {{ $img = $resource.RelPermalink }} {{ end }}
+                {{ end }}
+                <div class="p-item" data-url="{{ .RelPermalink }}" data-title="{{ .Title }}" data-img="{{ $img }}"></div>
+            {{ end }}
+        {{ end }}
+    </div>
+    <div id="glitch-display" class="random-projects-container"></div>
+
+{{ end }}
+{{ end }}
