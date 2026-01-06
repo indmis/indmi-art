@@ -1,11 +1,10 @@
 {{- define "main" -}}
 
-{{- if .IsHome -}}
-    {{/* 1. ПРИНУДИТЕЛЬНЫЙ ВЫВОД ПРОФИЛЯ (ГИФКА, ТЕКСТ, КНОПКИ) */}}
+{{- if or (.IsHome) (eq .RelPermalink "/indmi-art/") -}}
+    {{/* 1. ПРИНУДИТЕЛЬНЫЙ ВЫВОД ПРОФИЛЯ */}}
     <div class="profile">
-        {{- $common_path := (.Site.Params.profileMode.imageUrl | default "") -}}
         <div class="profile_inner">
-            <h1>{{ .Site.Params.profileMode.title | default .Site.Title }}</h1>
+            <h1>{{ .Site.Params.profileMode.title | default "Indmi Art" }}</h1>
             <span>{{ .Site.Params.profileMode.subtitle | safeHTML }}</span>
             <div class="social-icons"></div>
             <div class="buttons">
@@ -18,7 +17,7 @@
         </div>
     </div>
 
-    {{/* 2. НАШИ ДАННЫЕ ДЛЯ РАНДОМА */}}
+    {{/* 2. ДАННЫЕ ДЛЯ РАНДОМА */}}
     <div id="projects-pool" style="display: none;">
         {{- range .Site.RegularPages -}}
             {{- if in .RelPermalink "/posts/" -}}
@@ -32,21 +31,21 @@
         {{- end -}}
     </div>
     
-    {{/* 3. КОНТЕЙНЕР ДЛЯ СЛУЧАЙНЫХ КАРТОЧЕК */}}
+    {{/* 3. КОНТЕЙНЕР ДЛЯ ВЫВОДА */}}
     <div id="glitch-display" class="random-projects-container"></div>
 
 {{- else -}}
-    {{/* Код для обычных разделов (не трогаем) */}}
+    {{/* Код для разделов (Инсталляции, Фото и т.д.) */}}
     <header class="page-header"><h1>{{ .Title }}</h1></header>
     {{- if .Content -}}<div class="post-content">{{ .Content }}</div>{{- end -}}
-    {{- range .Paginator.Pages -}}
-        {{/* Стандартный вывод списка постов темы */}}
+    <div class="list-container">
+        {{- range .Paginator.Pages -}}
         <article class="post-entry">
             <header class="entry-header"><h2>{{ .Title }}</h2></header>
-            <section class="entry-content"><p>{{ .Summary }}</p></section>
             <a class="entry-link" href="{{ .RelPermalink }}"></a>
         </article>
-    {{- end -}}
+        {{- end -}}
+    </div>
 {{- end -}}
 
 {{- end -}}
