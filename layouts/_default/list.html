@@ -35,35 +35,34 @@
 {{- else -}}
     <header class="page-header">
         <h1>{{ .Title }}</h1>
-        {{- if .Description }}<div class="post-description">{{ .Description }}</div>{{- end }}
     </header>
 
-    {{- if .Content }}
-    <div class="post-content">{{ .Content }}</div>
-    {{- end }}
-
-    {{/* Вывод карточек постов с обложками */}}
-    {{- $pages := .Paginator.Pages -}}
     <div class="list-container">
-        {{- range $pages }}
-        <article class="post-entry project-card">
-            {{- if .Params.cover.image }}
-            <div class="entry-cover">
-                {{- $resource := .Resources.GetMatch .Params.cover.image -}}
-                {{- if $resource }}
-                    <img src="{{ $resource.RelPermalink }}" alt="{{ .Title }}">
-                {{- end }}
-            </div>
-            {{- end }}
-            
-            <header class="entry-header">
-                <h2>{{ .Title }}</h2>
-            </header>
-            
-            {{/* Ссылка на всю область карточки */}}
-            <a class="entry-link" href="{{ .RelPermalink }}"></a>
-        </article>
-        {{- end }}
+    {{- range .Paginator.Pages -}}
+    <article class="post-entry project-card">
+        {{- /* ПОИСК ОБЛОЖКИ В PAGE BUNDLE */ -}}
+        {{- $cover := "" -}}
+        {{- if .Params.cover.image -}}
+            {{- $cover = .Resources.GetMatch .Params.cover.image -}}
+        {{- end -}}
+
+        {{- if $cover -}}
+        <div class="entry-cover">
+            <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}">
+        </div>
+        {{- else -}}
+        {{- /* Заглушка, если обложки нет — чтобы карточки были одной формы */ -}}
+        <div class="entry-cover placeholder"></div>
+        {{- end -}}
+
+        <header class="entry-header">
+            <h2>{{ .Title }}</h2>
+        </header>
+        <a class="entry-link" href="{{ .RelPermalink }}"></a>
+    </article>
+    {{- end -}}
+    </div>
+{{- end -}}
 
 
     {{/* Пагинация */}}
