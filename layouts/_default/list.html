@@ -37,26 +37,35 @@
     </header>
 
     <div class="list-container">
-    {{/* Собираем всё в один массив */}}
+    {{/* Собираем уникальный список разделов и страниц */}}
     {{- $all := .Sections | append .Pages -}}
-    
-    {{/* Создаем пустой список для уникальных путей */}}
     {{- $unique_links := slice -}}
     
     {{- range $all -}}
-        {{/* Проверяем, выводили ли мы уже эту ссылку */}}
         {{- if not (in $unique_links .RelPermalink) -}}
             {{- $unique_links = $unique_links | append .RelPermalink -}}
             
             <article class="post-entry project-card">
-                {{- $cover := .Resources.GetMatch (.Params.cover.image | default "cover.webp") -}}
                 <div class="entry-cover">
+                    {{/* Ставим обложку по умолчанию (из _index.md или cover.webp) */}}
+                    {{- $cover := .Resources.GetMatch (.Params.cover.image | default "cover.webp") -}}
                     {{- if $cover -}}
-                        <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}">
+                        <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}" class="dynamic-cover">
                     {{- else -}}
                         <div class="placeholder" style="background: #1a1a1a; width:100%; height:100%;"></div>
                     {{- end -}}
                 </div>
+
+                {{/* СКРЫТЫЙ СПИСОК КАРТИНОК ДЛЯ РОТАЦИИ */}}
+                <div class="cover-pool" style="display:none;">
+                    {{- range .RegularPages -}}
+                        {{- if .Params.cover.image -}}
+                            {{- $p_cover := .Resources.GetMatch .Params.cover.image -}}
+                            {{- if $p_cover -}}<span>{{ $p_cover.RelPermalink }}</span>{{- end -}}
+                        {{- end -}}
+                    {{- end -}}
+                </div>
+
                 <header class="entry-header">
                     <h2>{{ .Title }}</h2>
                 </header>
