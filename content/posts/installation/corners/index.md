@@ -16,3 +16,8 @@ cover:
 </a>
 
 {{< gallery >}}
+
+DEBUG:
+{{ range .Page.Resources }}
+  Нашел файл: {{ .Name }} | Тип: {{ .MediaType }}
+{{ end }}
