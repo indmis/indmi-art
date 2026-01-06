@@ -31,9 +31,9 @@ languages:
     languageName: "Russian"
     menu:
       main:
-        - identifier: installations
+        - identifier: installation
           name: "Инсталляция"
-          url: /posts/installations/
+          url: /posts/installation/
           weight: 10
         - identifier: photography
           name: "Фотография"
