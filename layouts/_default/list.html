@@ -51,7 +51,6 @@
             <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}">
         </div>
         {{- else -}}
-        {{- /* Заглушка, если обложки нет — чтобы карточки были одной формы */ -}}
         <div class="entry-cover placeholder"></div>
         {{- end -}}
 
@@ -62,11 +61,8 @@
     </article>
     {{- end -}}
     </div>
-{{- end -}}
 
-
-
-    {{/* Пагинация */}}
+    {{/* Пагинация внутри блока списков */}}
     {{- if gt .Paginator.TotalPages 1 }}
     <footer class="page-footer">
         <nav class="pagination">
@@ -75,6 +71,7 @@
         </nav>
     </footer>
     {{- end }}
-{{- end -}}
 
-{{- end -}}
+{{- end -}}{{/* Конец условия IsHome */}}
+
+{{- end -}}{{/* Конец блока define "main" */}}
