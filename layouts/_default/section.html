@@ -1,20 +1,66 @@
 {{- define "main" -}}
-<header class="page-header">
-    <h1>{{ .Title }}</h1>
-</header>
 
-{{/* Этот цикл найдет ВСЕ страницы во всех подпапках текущего раздела */}}
-{{- $pages := .Pages -}}
 {{- if .IsHome -}}
-    {{/* Логика для главной... */}}
+    {{/* --- ГЛАВНАЯ СТРАНИЦА --- */}}
+    <div class="profile">
+        <div class="profile_inner">
+            <h1>{{ .Site.Params.profileMode.title | default "Indmi Art" }}</h1>
+            <span>{{ .Site.Params.profileMode.subtitle | safeHTML }}</span>
+            <div class="social-icons"></div>
+            <div class="buttons">
+                {{- range .Site.Params.profileMode.buttons }}
+                <a class="button" href="{{ .url | relURL }}" rel="noopener" title="{{ .name }}">
+                    <span class="button-inner">{{ .name }}</span>
+                </a>
+                {{- end }}
+            </div>
+        </div>
+    </div>
+
+    <div id="projects-pool" style="display: none;">
+        {{- range .Site.RegularPages -}}
+            {{- if in .RelPermalink "/posts/" -}}
+                {{- $img := "" -}}
+                {{- if .Params.cover.image -}}
+                    {{- $resource := .Resources.GetMatch .Params.cover.image -}}
+                    {{- if $resource -}} {{ $img = $resource.RelPermalink }} {{- end -}}
+                {{- end -}}
+                <div class="p-item" data-url="{{ .RelPermalink }}" data-title="{{ .Title }}" data-img="{{ $img }}"></div>
+            {{- end -}}
+        {{- end -}}
+    </div>
+    <div id="glitch-display" class="random-projects-container"></div>
+
 {{- else -}}
-    {{- range $pages -}}
-    <article class="post-entry">
+    {{/* --- СТРАНИЦЫ СПИСКОВ (РАЗДЕЛЫ) --- */}}
+    <header class="page-header">
+        <h1>{{ .Title }}</h1>
+    </header>
+
+    <div class="list-container">
+    {{- range .Paginator.Pages -}}
+    <article class="post-entry project-card">
+        {{- /* Ищем обложку */ -}}
+        {{- $cover := "" -}}
+        {{- if .Params.cover.image -}}
+            {{- $cover = .Resources.GetMatch .Params.cover.image -}}
+        {{- end -}}
+
+        <div class="entry-cover">
+            {{- if $cover -}}
+                <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}">
+            {{- else -}}
+                <div class="placeholder" style="background: #222; width:100%; height:100%;"></div>
+            {{- end -}}
+        </div>
+
         <header class="entry-header">
             <h2>{{ .Title }}</h2>
         </header>
         <a class="entry-link" href="{{ .RelPermalink }}"></a>
     </article>
     {{- end -}}
+    </div>
 {{- end -}}
+
 {{- end -}}
