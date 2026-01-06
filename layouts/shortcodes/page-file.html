@@ -1,13 +1,15 @@
 {{ $file := .Page.Resources.GetMatch (.Get 0) }}
 {{ if $file }}
-<a href="{{ $file.RelPermalink }}" target="_blank" class="pdf-link">
-  <span class="pdf-icon">📄</span>
-  <span class="pdf-text">
-    <span class="pdf-title">Смотреть PDF-материалы</span>
-    {{/* Исправлено: используем .Data.Size вместо .Len */}}
-    <span class="pdf-subtitle">Загрузить файл ({{ (div $file.Data.Size 1048576.0) | printf "%.2f" }} МБ)</span>
-  </span>
-</a>
+  {{/* Безопасный расчет размера в МБ */}}
+  {{ $size := div $file.Data.Size 1048576 }}
+  
+  <a href="{{ $file.RelPermalink }}" target="_blank" class="pdf-link">
+    <span class="pdf-icon">📄</span>
+    <span class="pdf-text">
+      <span class="pdf-title">Смотреть PDF-материалы</span>
+      <span class="pdf-subtitle">Загрузить файл (~{{ $size }} МБ)</span>
+    </span>
+  </a>
 {{ else }}
   <p style="color:red;">Файл {{ .Get 0 }} не найден в папке проекта!</p>
 {{ end }}
