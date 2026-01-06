@@ -1,0 +1,30 @@
+{{- define "main" -}}
+
+{{- if .IsHome -}}
+    {{/* Выводим профиль с гифкой */}}
+    {{- partial "home_info.html" . -}}
+    
+    {{/* НАШИ ДАННЫЕ ДЛЯ РАНДОМА */}}
+    <div id="projects-pool" style="display: none;">
+        {{- range .Site.RegularPages -}}
+            {{- if in .RelPermalink "/posts/" -}}
+                {{- $img := "" -}}
+                {{- if .Params.cover.image -}}
+                    {{- $resource := .Resources.GetMatch .Params.cover.image -}}
+                    {{- if $resource -}} {{ $img = $resource.RelPermalink }} {{- end -}}
+                {{- end -}}
+                <div class="p-item" data-url="{{ .RelPermalink }}" data-title="{{ .Title }}" data-img="{{ $img }}"></div>
+            {{- end -}}
+        {{- end -}}
+    </div>
+    <div id="glitch-display" class="random-projects-container"></div>
+
+{{- else -}}
+    {{/* Код для обычных списков (разделов), чтобы они не сломались */}}
+    {{- if .Content -}}
+    <div class="post-content">{{ .Content }}</div>
+    {{- end -}}
+    {{/* Тут стандартный вывод постов PaperMod... */}}
+{{- end -}}
+
+{{- end -}}
