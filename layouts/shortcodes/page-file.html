@@ -4,7 +4,8 @@
   <span class="pdf-icon">📄</span>
   <span class="pdf-text">
     <span class="pdf-title">Смотреть PDF-материалы</span>
-    <span class="pdf-subtitle">Загрузить файл ({{ (div $file.Len 1024000.0) | printf "%.2f" }} МБ)</span>
+    {{/* Исправлено: используем .Data.Size вместо .Len */}}
+    <span class="pdf-subtitle">Загрузить файл ({{ (div $file.Data.Size 1048576.0) | printf "%.2f" }} МБ)</span>
   </span>
 </a>
 {{ else }}
