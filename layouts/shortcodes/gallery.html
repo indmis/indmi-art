@@ -1,0 +1,11 @@
+<div class="photo-grid">
+  {{/* Hugo берет все ресурсы (картинки) из папки проекта */}}
+  {{ range .Page.Resources.ByType "image" }}
+    {{/* Пропускаем обложку, если не хотим её дублировать в сетке */}}
+    {{ if not (in .Name "cover") }} 
+      <a href="{{ .RelPermalink }}" class="gallery-item">
+        <img src="{{ .RelPermalink }}" alt="{{ .Name }}" loading="lazy">
+      </a>
+    {{ end }}
+  {{ end }}
+</div>
