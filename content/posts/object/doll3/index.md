@@ -1,5 +1,5 @@
 ---
-title: "Кукла #1"
+title: "Кукла #3"
 date: 2026-01-05
 cover:
     image: "cover.webp"
