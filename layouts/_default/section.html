@@ -1,0 +1,78 @@
+{{- define "main" -}}
+
+{{/* ПРОВЕРКА: ГЛАВНАЯ СТРАНИЦА */}}
+{{- if .IsHome -}}
+    <div class="profile">
+        <div class="profile_inner">
+            <h1>{{ .Site.Params.profileMode.title | default "Indmi Art" }}</h1>
+            <span>{{ .Site.Params.profileMode.subtitle | safeHTML }}</span>
+            <div class="social-icons"></div>
+            <div class="buttons">
+                {{- range .Site.Params.profileMode.buttons }}
+                <a class="button" href="{{ .url | relURL }}" rel="noopener" title="{{ .name }}">
+                    <span class="button-inner">{{ .name }}</span>
+                </a>
+                {{- end }}
+            </div>
+        </div>
+    </div>
+
+    <div id="projects-pool" style="display: none;">
+        {{- range .Site.RegularPages -}}
+            {{- if in .RelPermalink "/posts/" -}}
+                {{- $img := "" -}}
+                {{- if .Params.cover.image -}}
+                    {{- $resource := .Resources.GetMatch .Params.cover.image -}}
+                    {{- if $resource -}} {{ $img = $resource.RelPermalink }} {{- end -}}
+                {{- end -}}
+                <div class="p-item" data-url="{{ .RelPermalink }}" data-title="{{ .Title }}" data-img="{{ $img }}"></div>
+            {{- end -}}
+        {{- end -}}
+    </div>
+    <div id="glitch-display" class="random-projects-container"></div>
+
+{{/* ПРОВЕРКА: ВСЕ ОСТАЛЬНЫЕ СПИСКИ (Проекты, Инсталляции и т.д.) */}}
+{{- else -}}
+    <header class="page-header">
+        <h1>{{ .Title }}</h1>
+        {{- if .Description }}<div class="post-description">{{ .Description }}</div>{{- end }}
+    </header>
+
+    {{- if .Content }}
+    <div class="post-content">{{ .Content }}</div>
+    {{- end }}
+
+    {{/* Вывод карточек постов */}}
+    {{- $pages := .Paginator.Pages -}}
+    {{- range $pages }}
+    <article class="post-entry">
+        <header class="entry-header">
+            <h2>{{ .Title }}</h2>
+        </header>
+        {{- if .Params.cover.image }}
+        <div class="entry-content">
+            {{- $resource := .Resources.GetMatch .Params.cover.image -}}
+            {{- if $resource }}
+                <img src="{{ $resource.RelPermalink }}" alt="{{ .Title }}" style="max-width:100%; height:auto; margin-bottom:15px;">
+            {{- end }}
+        </div>
+        {{- end }}
+        <footer class="entry-footer">
+            {{- if .Date }}<span>{{ .Date.Format "02.01.2006" }}</span>{{- end }}
+        </footer>
+        <a class="entry-link" href="{{ .RelPermalink }}"></a>
+    </article>
+    {{- end }}
+
+    {{/* Пагинация */}}
+    {{- if gt .Paginator.TotalPages 1 }}
+    <footer class="page-footer">
+        <nav class="pagination">
+            {{- if .Paginator.HasPrev }}<a class="prev" href="{{ .Paginator.Prev.URL | relURL }}">« Назад</a>{{- end }}
+            {{- if .Paginator.HasNext }}<a class="next" href="{{ .Paginator.Next.URL | relURL }}">Далее »</a>{{- end }}
+        </nav>
+    </footer>
+    {{- end }}
+{{- end -}}
+
+{{- end -}}
