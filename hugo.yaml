@@ -1,4 +1,6 @@
 # 1. ИСПРАВЛЕННЫЙ BASEURL (должен вести на сайт, а не на репозиторий)
+# Update January 2026
+
 baseURL: "https://indmis.github.io/indmi-art/"
 languageCode: ru-ru
 title: "Indmi Art"
