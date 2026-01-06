@@ -116,17 +116,19 @@ img, video, iframe {
 }
 
 /* Контейнер для рандома */
+/* Настраиваем контейнер карточек */
 .random-projects-container {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    margin-top: 40px;
-    padding: 0 20px;
-    mix-blend-mode: difference; /* Инверсия по гифке */
+    gap: 40px;          /* Расстояние между карточками */
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px;  /* Чтобы на широких экранах не разлетались */
+    mix-blend-mode: difference;
 }
 
 .glitch-card {
-    width: 180px;
+    width: 320px;       /* Увеличили с 180px */
     text-align: center;
     transition: transform 0.3s ease;
 }
@@ -137,9 +139,10 @@ img, video, iframe {
 
 .glitch-card .glitch-img-wrap {
     width: 100%;
-    height: 110px;
+    height: 200px;      /* Увеличили высоту превью */
     overflow: hidden;
     border: 1px solid rgba(255,255,255,0.3);
+    background: #000;   /* Фон, если картинка долго грузится */
 }
 
 .glitch-card img {
@@ -150,12 +153,12 @@ img, video, iframe {
 }
 
 .glitch-card h3 {
-    margin-top: 10px;
-    font-size: 0.85rem;
-    line-height: 1.2;
+    margin-top: 15px;
+    font-size: 1.1rem;  /* Чуть крупнее шрифт */
+    font-weight: 300;
     color: #fff;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
 /* Адаптив: на мобилках в колонку */
@@ -163,8 +166,13 @@ img, video, iframe {
     .random-projects-container {
         flex-direction: column;
         align-items: center;
+        gap: 30px;
     }
     .glitch-card {
-        width: 80%;
+        width: 90%;     /* Почти на всю ширину экрана телефона */
+    }
+    .glitch-card .glitch-img-wrap {
+        height: 250px;  /* На мобилках можно сделать даже повыше */
     }
 }
+
