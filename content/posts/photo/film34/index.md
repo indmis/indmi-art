@@ -2,7 +2,7 @@
 title: "34 кадра экранов"
 date: 2026-01-05
 cover:
-    image: "05.webp"
+    image: "cover.webp"
     relative: true
 ---
 
