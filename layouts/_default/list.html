@@ -1,7 +1,7 @@
 {{- define "main" -}}
 
-{{/* ПРОВЕРКА: ГЛАВНАЯ СТРАНИЦА */}}
 {{- if .IsHome -}}
+    {{/* --- ГЛАВНАЯ СТРАНИЦА --- */}}
     <div class="profile">
         <div class="profile_inner">
             <h1>{{ .Site.Params.profileMode.title | default "Indmi Art" }}</h1>
@@ -31,8 +31,8 @@
     </div>
     <div id="glitch-display" class="random-projects-container"></div>
 
-{{/* ПРОВЕРКА: ВСЕ ОСТАЛЬНЫЕ СПИСКИ (Проекты, Инсталляции и т.д.) */}}
 {{- else -}}
+    {{/* --- СТРАНИЦЫ СПИСКОВ (РАЗДЕЛЫ) --- */}}
     <header class="page-header">
         <h1>{{ .Title }}</h1>
     </header>
@@ -40,19 +40,19 @@
     <div class="list-container">
     {{- range .Paginator.Pages -}}
     <article class="post-entry project-card">
-        {{- /* ПОИСК ОБЛОЖКИ В PAGE BUNDLE */ -}}
+        {{- /* Ищем обложку */ -}}
         {{- $cover := "" -}}
         {{- if .Params.cover.image -}}
             {{- $cover = .Resources.GetMatch .Params.cover.image -}}
         {{- end -}}
 
-        {{- if $cover -}}
         <div class="entry-cover">
-            <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}">
+            {{- if $cover -}}
+                <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}">
+            {{- else -}}
+                <div class="placeholder" style="background: #222; width:100%; height:100%;"></div>
+            {{- end -}}
         </div>
-        {{- else -}}
-        <div class="entry-cover placeholder"></div>
-        {{- end -}}
 
         <header class="entry-header">
             <h2>{{ .Title }}</h2>
@@ -61,17 +61,6 @@
     </article>
     {{- end -}}
     </div>
+{{- end -}}
 
-    {{/* Пагинация внутри блока списков */}}
-    {{- if gt .Paginator.TotalPages 1 }}
-    <footer class="page-footer">
-        <nav class="pagination">
-            {{- if .Paginator.HasPrev }}<a class="prev" href="{{ .Paginator.Prev.URL | relURL }}">« Назад</a>{{- end }}
-            {{- if .Paginator.HasNext }}<a class="next" href="{{ .Paginator.Next.URL | relURL }}">Далее »</a>{{- end }}
-        </nav>
-    </footer>
-    {{- end }}
-
-{{- end -}}{{/* Конец условия IsHome */}}
-
-{{- end -}}{{/* Конец блока define "main" */}}
+{{- end -}}
