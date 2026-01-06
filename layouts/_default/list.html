@@ -32,25 +32,27 @@
     <div id="glitch-display" class="random-projects-container"></div>
 
 {{- else -}}
-    {{/* --- СТРАНИЦЫ СПИСКОВ (РАЗДЕЛЫ) --- */}}
     <header class="page-header">
         <h1>{{ .Title }}</h1>
     </header>
 
+    {{/* .Pages видит и вложенные папки-разделы, и посты */}}
     <div class="list-container">
-    {{- range .Paginator.Pages -}}
+    {{- $list_pages := .Pages -}}
+    {{- range $list_pages -}}
     <article class="post-entry project-card">
-        {{- /* Ищем обложку */ -}}
-        {{- $cover := "" -}}
-        {{- if .Params.cover.image -}}
-            {{- $cover = .Resources.GetMatch .Params.cover.image -}}
-        {{- end -}}
+        
+        {{/* Пытаемся найти обложку в ресурсах текущей папки */}}
+        {{- $cover := .Resources.GetMatch (.Params.cover.image | default "cover.webp") -}}
 
         <div class="entry-cover">
             {{- if $cover -}}
                 <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}">
             {{- else -}}
-                <div class="placeholder" style="background: #222; width:100%; height:100%;"></div>
+                {{/* Если обложки нет, рисуем пустой блок с фоном, чтобы не ломать сетку */}}
+                <div class="placeholder" style="background: #1a1a1a; width:100%; height:100%; display: flex; align-items: center; justify-content: center; color: #444; font-size: 0.8rem;">
+                    {{ .Title }}
+                </div>
             {{- end -}}
         </div>
 
@@ -62,5 +64,6 @@
     {{- end -}}
     </div>
 {{- end -}}
+
 
 {{- end -}}
