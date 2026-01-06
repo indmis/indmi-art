@@ -1,0 +1,12 @@
+{{ $file := .Page.Resources.GetMatch (.Get 0) }}
+{{ if $file }}
+<a href="{{ $file.RelPermalink }}" target="_blank" class="pdf-link">
+  <span class="pdf-icon">📄</span>
+  <span class="pdf-text">
+    <span class="pdf-title">Смотреть PDF-материалы</span>
+    <span class="pdf-subtitle">Загрузить файл ({{ (div $file.Len 1024000.0) | printf "%.2f" }} МБ)</span>
+  </span>
+</a>
+{{ else }}
+  <p style="color:red;">Файл {{ .Get 0 }} не найден в папке проекта!</p>
+{{ end }}
