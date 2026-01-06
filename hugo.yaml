@@ -39,6 +39,10 @@ languages:
           name: "Фотография"
           url: /posts/photo/
           weight: 20
+        - identifier: object
+          name: "Объект"
+          url: /posts/object/
+          weight: 30
         - identifier: sound
           name: "Звук"
           url: /posts/sound/
