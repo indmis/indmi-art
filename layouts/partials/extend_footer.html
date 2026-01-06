@@ -22,3 +22,32 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const pool = document.querySelectorAll('#projects-pool .p-item');
+    const display = document.getElementById('glitch-display');
+    
+    if (pool.length > 0 && display) {
+        // 1. Превращаем список в массив и перемешиваем его
+        let shuffled = Array.from(pool).sort(() => 0.5 - Math.random());
+        
+        // 2. Берем первые 3 проекта
+        shuffled.slice(0, 3).forEach(project => {
+            const card = document.createElement('div');
+            card.className = 'glitch-card';
+            
+            // Собираем HTML карточки
+            card.innerHTML = `
+                <a href="${project.dataset.url}">
+                    <div class="glitch-img-wrap">
+                        <img src="${project.dataset.img}" alt="${project.dataset.title}">
+                    </div>
+                    <h3>${project.dataset.title}</h3>
+                </a>
+            `;
+            display.appendChild(card);
+        });
+    }
+});
+</script>
