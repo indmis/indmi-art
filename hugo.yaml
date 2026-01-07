@@ -32,6 +32,8 @@ params:
     buttons:
       - name: Проекты
         url: "posts/"
+      - name: Обо мне
+        url: "about/"
 
 languages:
   ru:

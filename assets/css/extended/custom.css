@@ -250,40 +250,73 @@ img, video, iframe {
     }
 }
 
-/* ОБНОВЛЕННЫЙ СТИЛЬ КНОПКИ ПРОЕКТЫ */
+/* 1. КОНТЕЙНЕР ДЛЯ КНОПОК (Центрирование и отступы) */
+body:has(.profile) .buttons {
+    display: flex;
+    flex-direction: column; /* На мобилках кнопки друг под другом */
+    align-items: center;
+    gap: 15px;
+    margin-top: 40px;      /* Отступ от текста приветствия */
+    margin-bottom: 60px;   /* Отступ до начала блока проектов */
+    animation: fadeInButton 2s ease-in-out;
+}
+
+/* На десктопе (планшетах) ставим кнопки в ряд */
+@media (min-width: 769px) {
+    body:has(.profile) .buttons {
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+/* 2. СТИЛЬ КНОПОК (Для обеих: Проекты и Обо мне) */
 body:has(.profile) .buttons a.button {
     background: transparent !important;
-    border: 1px solid #ffffff !important; /* Тонкая белая рамка */
-    padding: 12px 40px !important;
-    border-radius: 0px !important;       /* Делаем её строгой прямоугольной */
-    text-transform: uppercase !important; /* Все буквы большие */
-    letter-spacing: 4px !important;      /* Сильный разброс букв для арт-стиля */
+    border: 1px solid #ffffff !important;
+    padding: 14px 40px !important;
+    min-width: 220px;              /* Чтобы кнопки были одинаковой ширины */
+    border-radius: 0px !important; 
+    text-transform: uppercase !important;
+    letter-spacing: 3px !important;
     font-weight: 300 !important;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-    position: relative;
-    overflow: hidden;
-    mix-blend-mode: difference !important; /* Продолжаем магию инверсии */
+    mix-blend-mode: difference !important;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* ЭФФЕКТ ПРИ НАВЕДЕНИИ */
+/* Эффект при наведении */
 body:has(.profile) .buttons a.button:hover {
     background: #ffffff !important;
-    color: #000000 !important;           /* Инверсия цвета при наведении */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5) !important; /* Легкое свечение */
+    color: #000000 !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3) !important;
     transform: translateY(-2px) !important;
-    letter-spacing: 6px !important;      /* Буквы еще сильнее разъезжаются */
+    letter-spacing: 5px !important;
 }
 
-/* Убираем стандартную обводку PaperMod */
 body:has(.profile) .buttons a.button:focus {
     outline: none !important;
 }
 
-/* Анимация появления кнопки (опционально) */
-body:has(.profile) .buttons {
-    animation: fadeInButton 2s ease-in-out;
+/* 3. ПОДПИСЬ НАД РАНДОМНЫМИ ПРОЕКТАМИ (Для смыслового разделения) */
+#glitch-display::before {
+    content: "Selected Projects"; 
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.65rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 40px;
+    mix-blend-mode: difference;
+    grid-column: 1 / -1; /* Чтобы надпись была по центру сетки */
 }
 
+/* АНИМАЦИЯ ПОЯВЛЕНИЯ */
 @keyframes fadeInButton {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
