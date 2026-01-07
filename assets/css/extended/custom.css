@@ -301,37 +301,38 @@ body:has(.profile) .buttons a.button:focus {
     outline: none !important;
 }
 
-/* 3. ПОДПИСЬ НАД РАНДОМНЫМИ ПРОЕКТАМИ (ИСПРАВЛЕНО) */
+/* 3. ПОДПИСЬ НАД РАНДОМНЫМИ ПРОЕКТАМИ (ФИНАЛ 2026) */
 #glitch-display {
     display: flex;
-    flex-wrap: wrap;       /* Позволяет элементам переходить на новую строку */
+    flex-wrap: wrap;
     justify-content: center;
 }
 
 #glitch-display::before {
     content: "Selected Projects"; 
-    flex-basis: 100%;      /* Занимает всю ширину, выталкивая картинки вниз */
+    flex-basis: 100%;
     width: 100%;
-    
     display: block;
     text-align: center;
-    
-    /* Улучшенная читаемость */
-    font-size: 0.8rem;     /* Немного крупнее */
-    letter-spacing: 7px;   /* Больше разброс букв для стиля */
+    font-size: 0.9rem;      /* Увеличили базовый размер */
+    letter-spacing: 8px;    /* Арт-разброс букв */
     text-transform: uppercase;
-    opacity: 0.6;          /* Чуть ярче, чтобы не терялось */
-    
+    opacity: 0.7;           /* Еще чуть ярче */
     margin-bottom: 40px;
     mix-blend-mode: difference;
 }
 
-/* На мобилках делаем отступ чуть меньше, чтобы не было гигантской дыры */
+/* СПЕЦИАЛЬНО ДЛЯ МОБИЛОК: ДВЕ СТРОКИ И КРУПНЫЙ ШРИФТ */
 @media (max-width: 768px) {
     #glitch-display::before {
-        margin-bottom: 20px;
-        font-size: 0.7rem;
-        letter-spacing: 5px;
+        /* Магия переноса: \A — это символ новой строки */
+        content: "Selected\A Projects"; 
+        white-space: pre-wrap;    /* Позволяет учитывать переносы строк */
+        font-size: 1.2rem;        /* Делаем текст заметно крупнее */
+        line-height: 1.8;         /* Расстояние между двумя строками */
+        letter-spacing: 10px;     /* Еще больше стиля */
+        margin-bottom: 30px;
+        opacity: 0.8;
     }
 }
 
