@@ -1,7 +1,7 @@
 {{- define "main" -}}
 
 {{- if .IsHome -}}
-    {{/* --- ГЛАВНАЯ СТРАНИЦА --- */}}
+    {{/* --- ГЛАВНАЯ СТРАНИЦА (Оставляем без изменений, тут всё работало) --- */}}
     <div class="profile">
         <div class="profile_inner">
             <h1>{{ .Site.Params.profileMode.title | default "Indmi Art" }}</h1>
@@ -32,12 +32,12 @@
     <div id="glitch-display" class="random-projects-container"></div>
 
 {{- else -}}
+    {{/* --- СТРАНИЦЫ СПИСКОВ И РАЗДЕЛОВ --- */}}
     <header class="page-header">
         <h1>{{ .Title }}</h1>
     </header>
 
     <div class="list-container">
-    {{/* Собираем уникальный список разделов и страниц */}}
     {{- $all := .Sections | append .Pages -}}
     {{- $unique_links := slice -}}
     
@@ -47,18 +47,31 @@
             
             <article class="post-entry project-card">
                 <div class="entry-cover">
-                    {{/* Ставим обложку по умолчанию (из _index.md или cover.webp) */}}
+                    {{/* ЛОГИКА ПОИСКА ОБЛОЖКИ ДЛЯ ПЛИТКИ */}}
                     {{- $cover := .Resources.GetMatch (.Params.cover.image | default "cover.webp") -}}
+                    
+                    {{/* Если обложки нет у самого раздела, ищем её в проектах внутри этого раздела */}}
+                    {{- if not $cover -}}
+                        {{- range .RegularPages -}}
+                            {{- if and (not $cover) .Params.cover.image -}}
+                                {{- $cover = .Resources.GetMatch .Params.cover.image -}}
+                            {{- end -}}
+                        {{- end -}}
+                    {{- end -}}
+
                     {{- if $cover -}}
                         <img src="{{ $cover.RelPermalink }}" alt="{{ .Title }}" class="dynamic-cover">
                     {{- else -}}
+                        {{/* Если картинок нет совсем, рисуем пустую плитку */}}
                         <div class="placeholder" style="background: #1a1a1a; width:100%; height:100%;"></div>
                     {{- end -}}
                 </div>
 
-                {{/* СКРЫТЫЙ СПИСОК КАРТИНОК ДЛЯ РОТАЦИИ */}}
+                {{/* СКРЫТЫЙ ПУЛ ДЛЯ JavaScript РАНДОМА */}}
+                {{/* Мы собираем обложки ВСЕХ постов внутри этого раздела */}}
                 <div class="cover-pool" style="display:none;">
                     {{- range .RegularPages -}}
+                        {{- $p_img := "" -}}
                         {{- if .Params.cover.image -}}
                             {{- $p_cover := .Resources.GetMatch .Params.cover.image -}}
                             {{- if $p_cover -}}<span>{{ $p_cover.RelPermalink }}</span>{{- end -}}
@@ -75,7 +88,5 @@
     {{- end -}}
     </div>
 {{- end -}}
-
-
 
 {{- end -}}
