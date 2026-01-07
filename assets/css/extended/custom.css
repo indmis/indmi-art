@@ -381,3 +381,21 @@ body:has(.profile) .buttons a.button:focus {
         border-radius: 0px; /* На мобилках без рамок видео смотрится лучше */
     }
 }
+
+/* --- ЛИПКОЕ МЕНЮ (Sticky Header) --- */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    /* Эффект размытия, чтобы текст не сливался с фото при скролле */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.2) !important;
+    transition: background 0.3s ease;
+}
+
+/* Оставляем меню полностью прозрачным на главной, чтобы не портить вид гифки */
+body:has(.profile) .header {
+    background: transparent !important;
+    backdrop-filter: none;
+}
