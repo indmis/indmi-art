@@ -249,3 +249,42 @@ img, video, iframe {
         grid-template-columns: 1fr;
     }
 }
+
+/* ОБНОВЛЕННЫЙ СТИЛЬ КНОПКИ ПРОЕКТЫ */
+body:has(.profile) .buttons a.button {
+    background: transparent !important;
+    border: 1px solid #ffffff !important; /* Тонкая белая рамка */
+    padding: 12px 40px !important;
+    border-radius: 0px !important;       /* Делаем её строгой прямоугольной */
+    text-transform: uppercase !important; /* Все буквы большие */
+    letter-spacing: 4px !important;      /* Сильный разброс букв для арт-стиля */
+    font-weight: 300 !important;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    position: relative;
+    overflow: hidden;
+    mix-blend-mode: difference !important; /* Продолжаем магию инверсии */
+}
+
+/* ЭФФЕКТ ПРИ НАВЕДЕНИИ */
+body:has(.profile) .buttons a.button:hover {
+    background: #ffffff !important;
+    color: #000000 !important;           /* Инверсия цвета при наведении */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5) !important; /* Легкое свечение */
+    transform: translateY(-2px) !important;
+    letter-spacing: 6px !important;      /* Буквы еще сильнее разъезжаются */
+}
+
+/* Убираем стандартную обводку PaperMod */
+body:has(.profile) .buttons a.button:focus {
+    outline: none !important;
+}
+
+/* Анимация появления кнопки (опционально) */
+body:has(.profile) .buttons {
+    animation: fadeInButton 2s ease-in-out;
+}
+
+@keyframes fadeInButton {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
