@@ -382,20 +382,33 @@ body:has(.profile) .buttons a.button:focus {
     }
 }
 
-/* --- ЛИПКОЕ МЕНЮ (Sticky Header) --- */
+/* --- ИСПРАВЛЕННОЕ ЛИПКОЕ МЕНЮ --- */
 .header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    /* Эффект размытия, чтобы текст не сливался с фото при скролле */
+    
+    /* Эффект стекла для ВНУТРЕННИХ страниц */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     background: rgba(0, 0, 0, 0.2) !important;
-    transition: background 0.3s ease;
+    
+    transition: all 0.3s ease;
 }
 
-/* Оставляем меню полностью прозрачным на главной, чтобы не портить вид гифки */
+/* МАГИЯ ДЛЯ ГЛАВНОЙ: Возвращаем инверсию */
 body:has(.profile) .header {
+    /* 1. ПОЛНОСТЬЮ убираем фильтры и фоны, иначе инверсия ломается */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     background: transparent !important;
-    backdrop-filter: none;
+    
+    /* 2. Гарантируем режим наложения */
+    mix-blend-mode: difference !important;
+}
+
+/* Убеждаемся, что ссылки внутри шапки на главной тоже инвертируются */
+body:has(.profile) .header a {
+    color: #ffffff !important;
+    mix-blend-mode: difference !important;
 }
