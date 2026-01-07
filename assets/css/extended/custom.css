@@ -301,20 +301,40 @@ body:has(.profile) .buttons a.button:focus {
     outline: none !important;
 }
 
-/* 3. ПОДПИСЬ НАД РАНДОМНЫМИ ПРОЕКТАМИ (Для смыслового разделения) */
+/* 3. ПОДПИСЬ НАД РАНДОМНЫМИ ПРОЕКТАМИ (ИСПРАВЛЕНО) */
+#glitch-display {
+    display: flex;
+    flex-wrap: wrap;       /* Позволяет элементам переходить на новую строку */
+    justify-content: center;
+}
+
 #glitch-display::before {
     content: "Selected Projects"; 
-    display: block;
+    flex-basis: 100%;      /* Занимает всю ширину, выталкивая картинки вниз */
     width: 100%;
+    
+    display: block;
     text-align: center;
-    font-size: 0.65rem;
-    letter-spacing: 6px;
+    
+    /* Улучшенная читаемость */
+    font-size: 0.8rem;     /* Немного крупнее */
+    letter-spacing: 7px;   /* Больше разброс букв для стиля */
     text-transform: uppercase;
-    opacity: 0.4;
+    opacity: 0.6;          /* Чуть ярче, чтобы не терялось */
+    
     margin-bottom: 40px;
     mix-blend-mode: difference;
-    grid-column: 1 / -1; /* Чтобы надпись была по центру сетки */
 }
+
+/* На мобилках делаем отступ чуть меньше, чтобы не было гигантской дыры */
+@media (max-width: 768px) {
+    #glitch-display::before {
+        margin-bottom: 20px;
+        font-size: 0.7rem;
+        letter-spacing: 5px;
+    }
+}
+
 
 /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
 @keyframes fadeInButton {
