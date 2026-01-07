@@ -1,0 +1,14 @@
+{{- $src := .Page.Resources.GetMatch (.Get 0) -}}
+{{- if $src -}}
+<div class="gallery-item video-item">
+    <video preload="metadata" class="video-preview">
+        <source src="{{ $src.RelPermalink }}#t=0.1" type="video/mp4">
+    </video>
+    <!-- Иконка плей поверх -->
+    <div class="video-overlay" onclick="this.parentElement.querySelector('video').play(); this.style.display='none'; this.parentElement.querySelector('video').controls=true;">
+        <span class="play-button">▶</span>
+    </div>
+</div>
+{{- else -}}
+<p style="color:red;">Видео {{ .Get 0 }} не найдено</p>
+{{- end -}}
