@@ -412,3 +412,26 @@ body:has(.profile) .header a {
     color: #ffffff !important;
     mix-blend-mode: difference !important;
 }
+
+/* РАЗБИВАЕМ ЗАГОЛОВОК ПРОФИЛЯ НА ДВЕ СТРОКИ */
+body:has(.profile) .profile_inner h1 {
+    display: flex;
+    flex-direction: column; /* Ставит слова друг под другом */
+    align-items: center;    /* Центрирует слова */
+    line-height: 1.0;       /* Делает строки плотнее, чтобы они смотрелись как единый блок */
+    font-size: 3.5rem;      /* Можно чуть увеличить, если станет мелко */
+}
+
+/* Если хочешь, чтобы слова были разного размера или стиля, 
+   можно даже добавить задержку анимации для второй строки */
+body:has(.profile) .profile_inner h1::first-line {
+    /* Стили для первой строки, если нужно */
+}
+
+/* На мобилках уменьшаем размер, чтобы две строки влезли в экран */
+@media (max-width: 768px) {
+    body:has(.profile) .profile_inner h1 {
+        font-size: 2.5rem;
+        gap: 10px; /* Расстояние между строками на мобилке */
+    }
+}

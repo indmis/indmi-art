@@ -27,7 +27,7 @@ params:
     - object
   profileMode:
     enabled: true
-    title: "indmi<br>Артемий Михайлов"
+    title: "indmi Артемий Михайлов"
     subtitle: "Междисциплинарный художник"
     buttons:
       - name: Проекты
