@@ -301,7 +301,7 @@ body:has(.profile) .buttons a.button:focus {
     outline: none !important;
 }
 
-/* 3. ПОДПИСЬ НАД РАНДОМНЫМИ ПРОЕКТАМИ (ФИНАЛ 2026) */
+/* 3. ПОДПИСЬ НАД РАНДОМНЫМИ ПРОЕКТАМИ (МАКСИМАЛЬНАЯ ИНВЕРСИЯ) */
 #glitch-display {
     display: flex;
     flex-wrap: wrap;
@@ -314,25 +314,33 @@ body:has(.profile) .buttons a.button:focus {
     width: 100%;
     display: block;
     text-align: center;
-    font-size: 0.9rem;      /* Увеличили базовый размер */
-    letter-spacing: 8px;    /* Арт-разброс букв */
+    
+    /* Цвет и режим смешивания */
+    color: #ffffff !important; 
+    opacity: 1 !important; /* Убираем прозрачность полностью для силы инверсии */
+    mix-blend-mode: difference !important;
+    
+    font-size: 0.9rem;
+    letter-spacing: 8px;
     text-transform: uppercase;
-    opacity: 0.7;           /* Еще чуть ярче */
     margin-bottom: 40px;
-    mix-blend-mode: difference;
 }
 
-/* СПЕЦИАЛЬНО ДЛЯ МОБИЛОК: ДВЕ СТРОКИ И КРУПНЫЙ ШРИФТ */
+/* МОБИЛКА: ДВЕ СТРОКИ + ИНВЕРСИЯ */
 @media (max-width: 768px) {
     #glitch-display::before {
-        /* Магия переноса: \A — это символ новой строки */
         content: "Selected\A Projects"; 
-        white-space: pre-wrap;    /* Позволяет учитывать переносы строк */
-        font-size: 1.2rem;        /* Делаем текст заметно крупнее */
-        line-height: 1.8;         /* Расстояние между двумя строками */
-        letter-spacing: 10px;     /* Еще больше стиля */
-        margin-bottom: 30px;
-        opacity: 0.8;
+        white-space: pre-wrap;
+        
+        /* Увеличиваем масштаб для мобилки */
+        font-size: 1.4rem; 
+        line-height: 1.4;
+        letter-spacing: 12px;
+        margin-bottom: 35px;
+        
+        /* Гарантируем чистый белый для негатива */
+        color: #ffffff !important;
+        opacity: 1 !important;
     }
 }
 
