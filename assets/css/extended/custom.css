@@ -309,7 +309,7 @@ body:has(.profile) .buttons a.button:focus {
 }
 
 #glitch-display::before {
-    content: "Random Selected Projects:"; 
+    content: "три случайных проекта:"; 
     flex-basis: 100%;
     width: 100%;
     display: block;
@@ -329,7 +329,7 @@ body:has(.profile) .buttons a.button:focus {
 /* МОБИЛКА: ДВЕ СТРОКИ + ИНВЕРСИЯ */
 @media (max-width: 768px) {
     #glitch-display::before {
-        content: "Random\A Selected\A Projects:"; 
+        content: "три\A случайных\A проекта:"; 
         white-space: pre-wrap;
         
         /* Увеличиваем масштаб для мобилки */
