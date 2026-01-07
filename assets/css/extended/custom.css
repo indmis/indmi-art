@@ -9,10 +9,10 @@ body {
     background-attachment: scroll !important; 
 }
 
-/* На десктопе возвращаем эффект фиксации */
+/* На десктопе возвращаем эффект скролла */
 @media (min-width: 769px) {
     body {
-        background-attachment: fixed !important;
+        background-attachment: scroll !important;
     }
 }
 
