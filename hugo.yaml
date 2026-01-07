@@ -52,10 +52,10 @@ languages:
           name: "Объект"
           url: /posts/object/
           weight: 30
-        - identifier: sound
-          name: "Звук"
-          url: /posts/sound/
-          weight: 30
+#        - identifier: sound
+#          name: "Звук"
+#          url: /posts/sound/
+#          weight: 30
         - identifier: about
           name: "Обо мне"
           url: /about/
