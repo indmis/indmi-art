@@ -3,7 +3,7 @@
 
 baseURL: "https://indmis.github.io/indmi-art/"
 languageCode: ru-ru
-title: "indmi art"
+title: "Артемий Михайлов, художник работающий со звуком, объектами, рисунком и инсталляциями."
 theme: "PaperMod"
 
 defaultContentLanguage: "ru"
@@ -27,7 +27,7 @@ params:
     - object
   profileMode:
     enabled: true
-    title: "indmi Артемий Михайлов"
+    title: "Артемий Михайлов"
     subtitle: "Междисциплинарный художник"
     buttons:
       - name: Проекты

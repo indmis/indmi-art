@@ -1,6 +1,6 @@
 ---
 title: "34 кадра экранов"
-date: 2026-01-05
+date: 2025-06-30
 cover:
     image: "cover.webp"
     relative: true
