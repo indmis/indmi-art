@@ -28,7 +28,7 @@ params:
   profileMode:
     enabled: true
     title: "Артемий Михайлов"
-    subtitle: "Междисциплинарный художник"
+    subtitle: "художник"
     buttons:
       - name: Проекты
         url: "posts/"
